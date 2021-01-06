@@ -71,7 +71,7 @@ const HomeSidebar = () => {
             <div className="accordion-item">
                <h2 className="accordion-header" id="flush-headingFour">
                   <button className="accordion-button collapsed text-capitalize" type="button" data-toggle="collapse" data-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                     student union government
+                     SUG
                </button>
                </h2>
                <div id="flush-collapseFour" className="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-parent="#accordionFlushExample">

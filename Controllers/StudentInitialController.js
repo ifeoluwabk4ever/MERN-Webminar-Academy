@@ -37,16 +37,10 @@ export const InitialNewRegister = async (req, res) => {
          regID = getRegID()
       }
 
-      let passcode = getUniquePassword()
+      let passcode = getUniquePasscode()
 
       let newUser = new UserInitial({ firstName, lastName, fullName, email, passcode, telephone, dob, regID, avatar })
 
-      // Create salt && hash
-      // Encrypt password
-      // let salt = await bcrypt.genSalt(10)
-      // Save password
-      // newUser.password = await bcrypt.hash(password, salt)
-      // Save data in database
       await newUser.save()
 
       // Create jwt to auth
@@ -102,16 +96,6 @@ export const InitialNewLoginUser = async (req, res) => {
          })
       }
 
-      // Know user found by regID, comparing password
-      // let isMatch = await bcrypt.compare(password, user.password)
-
-      // If error
-      // if (!isMatch) {
-      //    return res.status(400).json({
-      //       msg: 'Invalid password...'
-      //    })
-      // }
-
       // If login success, create accesstoken and refreshtoken
       const accesstoken = createAccessToken({ id: user._id })
 
@@ -133,11 +117,11 @@ export const InitialNewLoginUser = async (req, res) => {
 // @access  Private User
 export const addTestUpdate = async (req, res) => {
    try {
-      let user = await UserInitial.findById(req.user.id)
+      let user = await UserInitial.findById(req.initalStudent.id)
       if (!user) return res.status(400).json({
          msg: "User does not exist"
       })
-      await UserInitial.findByIdAndUpdate({ _id: req.user.id }, {
+      await UserInitial.findByIdAndUpdate({ _id: req.initalStudent.id }, {
          testScore: req.body.testScore,
          hadTest: req.body.hadTest
       })
@@ -157,7 +141,7 @@ export const addTestUpdate = async (req, res) => {
 // @access  Private User
 export const getInitialUser = async (req, res) => {
    try {
-      let user = await UserInitial.findById(req.initalStudent.id).select('-password')
+      let user = await UserInitial.findById(req.initalStudent.id)
       if (!user) return res.status(400).json({
          msg: "User does not exist..."
       })
@@ -175,7 +159,7 @@ export const getInitialUser = async (req, res) => {
 
 
 const createAccessToken = user => {
-   return jwt.sign(user, process.env.Jwt_Secret, { expiresIn: '2h' })
+   return jwt.sign(user, process.env.Jwt_Secret_Initial_Student, { expiresIn: '2h' })
 }
 
 export const getRegID = () => {
@@ -195,7 +179,7 @@ export const getRegID = () => {
    return finalValue
 }
 
-export const getUniquePassword = () => {
+export const getUniquePasscode = () => {
    let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f']
    var numb = []
    for (let i = 1; i <= 8; i++) {
@@ -206,13 +190,6 @@ export const getUniquePassword = () => {
       return r += a
    }, '')
    let finalValue = `${semi}`
-
-   return finalValue
-}
-
-export const getSchoolMail = (first, last, matric) => {
-   let MatricString = matric.toString().substr(2)
-   let finalValue = `${first}${last}${MatricString}@myschool.edu.ng`
 
    return finalValue
 }

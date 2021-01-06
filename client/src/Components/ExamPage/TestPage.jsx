@@ -74,8 +74,8 @@ const TestPage = ({ loadNewUser, isLoading }) => {
                msg: 'Submitted'
             })
          }
-         let testScore = { percentage, isPassed: `${percentage >= 70 ? true : false}` }
-         let res = await axios.patch(`/api/new-users/add-test-update`, { testScore, hadTest: true })
+         let testScore = { percentage: Number(percentage), isPassed: percentage >= 70 ? true : false }
+         let res = await axios.patch(`/api/new-student/add-test-update`, { testScore, hadTest: true })
          loadNewUser()
          console.log(res.data);
       } catch (error) {

@@ -7,7 +7,7 @@ const finalAuth = async (req, res, next) => {
          msg: "No token , authorization denied"
       })
 
-      jwt.verify(token, process.env.Jwt_Secret, (err, user) => {
+      jwt.verify(token, process.env.Jwt_Secret_Final_Student, (err, user) => {
          if (err) return res.status(400).json({
             msg: "Invalid Authentication, Unauthorized User"
          })

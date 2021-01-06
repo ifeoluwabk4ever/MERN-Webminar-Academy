@@ -29,7 +29,7 @@ export let loadNewUser = () => async dispatch => {
    }
 
    try {
-      let res = await axios.get(`/api/new-users/info`)
+      let res = await axios.get(`/api/new-student/info`)
       dispatch({
          type: USER_LOADED,
          payload: res.data.user,
@@ -57,7 +57,7 @@ export let registerNewUser = ({ firstName, lastName, email, telephone, dob, avat
    dispatch({ type: SET_LOADING })
    try {
       // Response
-      let res = await axios.post(`/api/new-users/register`, body, config)
+      let res = await axios.post(`/api/new-student/register`, body, config)
       dispatch({
          type: REGISTER_SUCCESS,
          payload: res.data
@@ -88,7 +88,7 @@ export let loginNewPostUtmeUser = ({ regID, passcode }) => async dispatch => {
    dispatch({ type: SET_LOADING })
    try {
       // Response
-      let res = await axios.post(`/api/new-users/login`, body, config)
+      let res = await axios.post(`/api/new-student/login`, body, config)
       dispatch({
          type: LOGIN_POST_UTME,
          payload: res.data
@@ -118,7 +118,7 @@ export let retrieveUserID = ({ email }) => async dispatch => {
    dispatch({ type: SET_LOADING })
    try {
       // Response
-      let res = await axios.post(`/api/new-users/retrieve-regID`, body, config)
+      let res = await axios.post(`/api/new-student/retrieve-regID`, body, config)
       dispatch({
          type: RETRIEVE_SUCCESS,
          payload: res.data

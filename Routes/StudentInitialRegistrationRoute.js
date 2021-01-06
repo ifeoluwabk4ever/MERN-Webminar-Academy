@@ -1,7 +1,7 @@
 import express from 'express'
 
 
-import InitialAuth from '../Middleware/InitalStudentAuth.js'
+import initialAuth from '../Middleware/InitialStudentAuth.js'
 import { InitialNewLoginUser, getInitialUser, InitialNewRegister, addTestUpdate } from '../Controllers/StudentInitialController.js'
 
 
@@ -11,8 +11,8 @@ router.post('/register', InitialNewRegister)
 
 router.post('/login', InitialNewLoginUser)
 
-router.get('/info', InitialAuth, getInitialUser)
+router.get('/info', initialAuth, getInitialUser)
 
-router.patch('/add-test-update', InitialAuth, addTestUpdate)
+router.patch('/add-test-update', initialAuth, addTestUpdate)
 
 export default router
