@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'reactstrap'
-import StudentLogin from '../Auth/StudentLogin'
-import StudentRetrieveID from '../Auth/StudentRetrieveID'
+import StudentLogin from '../Auth/RegAuth/StudentLogin'
+import StudentRetrieveID from '../Auth/RegAuth/StudentRetrieveID'
 
 const HomeSidebar = () => {
    return (

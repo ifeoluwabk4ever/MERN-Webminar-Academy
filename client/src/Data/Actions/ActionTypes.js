@@ -1,15 +1,24 @@
-// Auth Action Types
+// Test Auth Action Types
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 export const REGISTER_FAIL = 'REGISTER_FAIL'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
-export const ALL_USERS = 'ALL_USERS'
-export const ALL_USERS_FAIL = 'ALL_USERS_FAIL'
 export const USER_LOADED = 'USER_LOADED'
 export const AUTH_ERROR = 'AUTH_ERROR'
-export const LOGOUT = 'LOGOUT'
 export const SET_LOADING = 'SET_LOADING'
-export const RETRIEVE_SUCCESS = 'RETRIEVE_SUCCESS'
-export const RETRIEVE_FAIL = 'RETRIEVE_FAIL'
-export const LOGIN_POST_UTME = 'LOGIN_POST_UTME'
-export const LOGIN_POST_UTME_FAIL = 'LOGIN_POST_UTME_FAIL'
+
+
+
+//  Main Student Auth Action Types
+export const STUDENT_REGISTER_SUCCESS = 'STUDENT_REGISTER_SUCCESS'
+export const STUDENT_REGISTER_FAIL = 'STUDENT_REGISTER_FAIL'
+export const STUDENT_LOGIN_SUCCESS = 'STUDENT_LOGIN_SUCCESS'
+export const STUDENT_LOGIN_FAIL = 'STUDENT_LOGIN_FAIL'
+export const STUDENT_USER_LOADED = 'STUDENT_USER_LOADED'
+export const STUDENT_AUTH_ERROR = 'STUDENT_AUTH_ERROR'
+export const STUDENT_SET_LOADING = 'STUDENT_SET_LOADING'
+
+
+
+// General Auth Action Type
+export const LOGOUT = 'LOGOUT'

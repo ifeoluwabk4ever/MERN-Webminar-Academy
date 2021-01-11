@@ -61,6 +61,10 @@ const StudentRegsitrationSchema = new mongoose.Schema({
    hadTest: {
       type: Boolean,
       default: false
+   },
+   role: {
+      type: String,
+      default: 'UtmeScreening'
    }
 }, { timestamps: true })
 

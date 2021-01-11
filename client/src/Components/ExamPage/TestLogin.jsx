@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -7,6 +7,7 @@ import { loginNewPostUtmeUser } from '../../Data/Actions/InitRegAction'
 import { FadeLoader } from 'react-spinners'
 
 const TestLogin = ({ loginNewPostUtmeUser, isRegID, isLoading }) => {
+   const [callbackTest, setCallbackTest] = useState(false);
    const [data, setData] = useState({
       regID: '',
       passcode: ''
@@ -17,19 +18,33 @@ const TestLogin = ({ loginNewPostUtmeUser, isRegID, isLoading }) => {
       setData({ ...data, [input]: e.target.value })
    }
 
-   const handleSubmit = async e => {
+   const handleSubmitTestLogin = async e => {
       e.preventDefault()
       loginNewPostUtmeUser({ regID, passcode })
+
+      setCallbackTest(true)
+
    }
 
-   if (isRegID) {
+   useEffect(() => {
+      if (isRegID && callbackTest) {
+         setData({
+            ...data,
+            regID: '',
+            passcode: ''
+         })
+      }
+   }, [callbackTest])
+
+   if (isRegID && callbackTest) {
       return <Redirect to="/new-student-preview" />
    }
+
 
    return (
       <div className="d-flex justify-content-center align-items-center test-login">
          <div className="m-auto">
-            <form className="shadow p-4" onSubmit={handleSubmit}>
+            <form className="shadow p-4" onSubmit={handleSubmitTestLogin}>
                <div>
                   <h3 className="text-uppercase text-center mb-3">Test login page</h3>
                   <p className="text-muted mb-5">Please supply the registration number and passcode in your slip in the space provided below...</p>

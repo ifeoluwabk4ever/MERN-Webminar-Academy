@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import UserInitial from '../Models/StudentInitialRegistrationModel.js'
 
 
-// @route   POST /api/new-users/register
+// @route   POST /api/new-student/register
 // @desc    Register new user
 // @access  Public 
 export const InitialNewRegister = async (req, res) => {
@@ -58,7 +58,7 @@ export const InitialNewRegister = async (req, res) => {
 }
 
 
-// @route   POST /api/new-users/login
+// @route   POST /api/new-student/login
 // @desc    Login user
 // @access  Public
 export const InitialNewLoginUser = async (req, res) => {
@@ -112,16 +112,64 @@ export const InitialNewLoginUser = async (req, res) => {
 }
 
 
+// @route   POST /api/new-student/login-normal
+// @desc    Login user
+// @access  Public
+export const InitialLoginUser = async (req, res) => {
+   try {
+      // get regID and password from req body
+      let { regID, passcode } = req.body
+
+      if (!regID) return res.status(400).json({
+         msg: "Registration number is required...."
+      })
+
+      if (!passcode) return res.status(400).json({
+         msg: "Passcode required...."
+      })
+
+      // Find user
+      let user = await UserInitial.findOne({ regID })
+
+      // If no user in db
+      if (!user) {
+         return res.status(400).json({
+            msg: 'User does not exist...'
+         })
+      }
+
+      if (passcode !== user.passcode) {
+         return res.status(400).json({
+            msg: 'Passcode do not match...'
+         })
+      }
+
+      // If login success, create accesstoken and refreshtoken
+      const accesstoken = createAccessToken({ id: user._id })
+
+      res.json({
+         token: accesstoken,
+         msg: `Welcome ${user.firstName}`
+      })
+   } catch (error) {
+      console.log(error.message);
+      res.status(500).json({
+         msg: error.message
+      })
+   }
+}
+
+
 // @desc    Add test detail to Database
-// @route   PATCH /api/new-users/add-test-update
+// @route   PATCH /api/new-student/add-test-update
 // @access  Private User
 export const addTestUpdate = async (req, res) => {
    try {
-      let user = await UserInitial.findById(req.initalStudent.id)
+      let user = await UserInitial.findById(req.initialStudent.id)
       if (!user) return res.status(400).json({
          msg: "User does not exist"
       })
-      await UserInitial.findByIdAndUpdate({ _id: req.initalStudent.id }, {
+      await UserInitial.findByIdAndUpdate({ _id: req.initialStudent.id }, {
          testScore: req.body.testScore,
          hadTest: req.body.hadTest
       })
@@ -136,12 +184,12 @@ export const addTestUpdate = async (req, res) => {
 }
 
 
-// @route   GET /api/new-users/info
+// @route   GET /api/new-student/info
 // @desc    Get Each User Information
 // @access  Private User
 export const getInitialUser = async (req, res) => {
    try {
-      let user = await UserInitial.findById(req.initalStudent.id)
+      let user = await UserInitial.findById(req.initialStudent.id)
       if (!user) return res.status(400).json({
          msg: "User does not exist..."
       })

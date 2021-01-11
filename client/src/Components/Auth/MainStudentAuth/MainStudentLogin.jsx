@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { Modal, ModalHeader, ModalBody, NavLink } from 'reactstrap'
 import { connect } from 'react-redux'
 import { MoonLoader } from 'react-spinners'
-import StudentRetrieveID from './StudentRetrieveID'
 import { Redirect } from 'react-router-dom'
-// import { loginNewUser } from '../../Data/Actions/InitRegAction'
+import { loginMainStudent } from '../../../Data/Actions/FinalRegAction'
 
 
-const StudentLogin = ({ loginNewUser, isAuth, isLoading }) => {
+const MainStudentLogin = ({ loginMainStudent, isValidStudent, isLoading }) => {
 
    let [data, setData] = useState({
-      regID: '',
-      passcode: ''
+      matricNo: '',
+      password: ''
    })
    let [modal, setModal] = useState(false)
+   let [callbackMSL, setCallbackMSL] = useState(false)
 
-   let { regID, passcode } = data
+   let { matricNo, password } = data
 
    let textChange = name => e => {
       setData({ ...data, [name]: e.target.value })
@@ -23,33 +23,38 @@ const StudentLogin = ({ loginNewUser, isAuth, isLoading }) => {
 
    let handleSubmit = async e => {
       e.preventDefault()
-      // loginNewUser({ regID, passcode })
+      loginMainStudent({ matricNo, password })
+
+      setCallbackMSL(true)
    }
 
    let toggle = () => {
       setModal(!modal)
    }
    let clearDefault = () => {
-      setInterval(() => {
-         setData({
-            ...data,
-            regID: '',
-            passcode: ''
-         })
-      }, 2000);
+      setData({
+         ...data,
+         matricNo: '',
+         password: ''
+      })
    }
-   if (isAuth) {
+
+   useEffect(() => {
+      if (isValidStudent && callbackMSL) {
+         clearDefault()
+      }
+   }, [callbackMSL])
+
+
+   if (isValidStudent) {
       if (modal) {
          toggle()
       }
    }
 
-   useEffect(() => {
-      if (isAuth) {
-         clearDefault();
-         return <Redirect to="/" />
-      }
-   }, [isAuth])
+   if (isValidStudent && callbackMSL) {
+      return <Redirect to="/student-profile-page" />
+   }
 
    return (
       <div>
@@ -64,23 +69,23 @@ const StudentLogin = ({ loginNewUser, isAuth, isLoading }) => {
                      <input
                         type="text"
                         className="form-control text-black"
-                        id="regNumber"
-                        placeholder="Your registration number"
-                        value={regID}
-                        onChange={textChange("regID")}
+                        id="matricNo"
+                        placeholder="Your matric number"
+                        value={matricNo}
+                        onChange={textChange("matricNo")}
                      />
-                     <label htmlFor="regNumber">Registration Number:</label>
+                     <label htmlFor="matricNo">Matric Number:</label>
                   </div>
                   <div className="form-floating mb-3">
                      <input
                         type="password"
                         className="form-control text-black"
-                        id="passcode"
+                        id="password"
                         placeholder="******"
-                        value={passcode}
-                        onChange={textChange('passcode')}
+                        value={password}
+                        onChange={textChange('password')}
                      />
-                     <label htmlFor="passcode">Passcode:</label>
+                     <label htmlFor="password">Password:</label>
                   </div>
                   {
                      isLoading &&
@@ -95,9 +100,6 @@ const StudentLogin = ({ loginNewUser, isAuth, isLoading }) => {
                         className="btn btn-success my-3 px-4 text-capitalize"
                      >Login</button>
                   }
-                  <div className="d-flex justify-content-end">
-                     <div className="text-capitalize d-flex align-items-center">forgotten ID?<StudentRetrieveID /></div>
-                  </div>
                </form>
             </ModalBody>
          </Modal>
@@ -108,8 +110,8 @@ const StudentLogin = ({ loginNewUser, isAuth, isLoading }) => {
 
 
 const mapStateToProps = state => ({
-   isAuth: state.initReg.isAuthenticated,
-   isLoading: state.initReg.isLoading,
+   isValidStudent: state.mainStudent.isValidStudent,
+   isLoading: state.mainStudent.isLoading,
 })
 
-export default connect(mapStateToProps, null)(StudentLogin)
+export default connect(mapStateToProps, { loginMainStudent })(MainStudentLogin)

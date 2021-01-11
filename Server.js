@@ -12,7 +12,7 @@ import path from 'path'
 // Import files
 import connectDB from './Config/Db.js'
 import StudentInitialRoute from './Routes/StudentInitialRegistrationRoute.js'
-import StudentFinalRoute from './Routes/StudentInitialRegistrationRoute.js'
+import StudentFinalRoute from './Routes/StudentFinalRegistrationRoute.js'
 import ImageUpload from './Routes/ImageUpload.js'
 
 const app = express()
@@ -38,7 +38,7 @@ app.use('/api', ImageUpload)
 // Page not found
 app.use((req, res) => {
    res.status(400).json({
-      msg: `Page not found`
+      msg: `Route not found`
    })
 })
 

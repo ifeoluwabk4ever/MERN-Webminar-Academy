@@ -12,7 +12,7 @@ const initialAuth = async (req, res, next) => {
             msg: "Invalid Authentication, Unauthorized User"
          })
 
-         req.initalStudent = user
+         req.initialStudent = user
          next()
       })
    } catch (error) {

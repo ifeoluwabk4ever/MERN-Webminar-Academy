@@ -36,6 +36,12 @@ const StudentMainRegsitrationSchema = new mongoose.Schema({
       unique: true,
       trim: true
    },
+   email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true
+   },
    password: {
       type: String,
       trim: true,
@@ -44,30 +50,49 @@ const StudentMainRegsitrationSchema = new mongoose.Schema({
    },
    telephone: {
       type: String,
+      required: true,
       default: null
    },
    dob: {
       type: Date,
+      required: true,
       default: 'Nil',
    },
-   regID: {
+   regIDLink: {
       type: ObjectId,
       required: true,
       unique: true,
       trim: true,
       ref: 'StudentReg'
    },
+   regID: {
+      type: String,
+      required: true,
+      trim: true
+   },
    matricNo: {
-      type: Number,
+      type: String,
       required: true,
       trim: true,
+      unique: true
+   },
+   serialNo: {
+      type: Number,
+      required: true,
       unique: true
    },
    level: {
       type: Number,
       required: true,
       trim: true
-
+   },
+   DEStudent: {
+      type: Boolean,
+      default: false
+   },
+   role: {
+      type: String,
+      default: 'Undergraduate'
    }
 },
    { timestamps: true }

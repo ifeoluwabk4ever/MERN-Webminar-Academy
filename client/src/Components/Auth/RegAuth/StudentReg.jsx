@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { DotLoader, MoonLoader } from 'react-spinners';
-import { registerNewUser } from '../../Data/Actions/InitRegAction';
+import { registerNewUser } from '../../../Data/Actions/InitRegAction';
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { FaTimes } from 'react-icons/all'
@@ -16,7 +16,7 @@ const initialState = {
    dob: ''
 }
 
-const StudentReg = ({ isAuth, isLoading, registerNewUser }) => {
+const StudentReg = ({ isRegID, isLoading, registerNewUser }) => {
 
    const [data, setData] = useState(initialState);
    const { firstName, lastName, email, telephone, dob } = data
@@ -27,6 +27,7 @@ const StudentReg = ({ isAuth, isLoading, registerNewUser }) => {
 
    const [images, setImages] = useState(false)
    let [loading, setLoading] = useState(false)
+   let [callbackPSR, setCallbackPSR] = useState(false)
    let [avatar, setAvatar] = useState('')
 
    let styleUpload = {
@@ -77,29 +78,32 @@ const StudentReg = ({ isAuth, isLoading, registerNewUser }) => {
    let handleSubmit = async e => {
       e.preventDefault()
       registerNewUser({ firstName, lastName, email, telephone, dob, avatar })
+
+      setCallbackPSR(true)
    }
    let clearDefault = () => {
-      setInterval(() => {
-         setData({
-            ...data,
-            firstName: '',
-            lastName: '',
-            email: '',
-            telephone: '',
-            dob: ''
-         });
-         setAvatar('')
-      }, 2000);
+      setData({
+         ...data,
+         firstName: '',
+         lastName: '',
+         email: '',
+         telephone: '',
+         dob: ''
+      });
+      setAvatar('')
    }
+
    useEffect(() => {
-      if (isAuth) {
+      if (isRegID && callbackPSR) {
          clearDefault();
       }
-   }, [isAuth])
+   }, [callbackPSR])
 
-   if (isAuth) {
+   if (isRegID && callbackPSR) {
       return <Redirect to="/new-student-post-utme-detail" />
    }
+
+
    return (
       <div className="py-5 reg-form m-auto">
          <h1 className="text-center text-uppercase mb-3">Registration form</h1>
@@ -206,7 +210,7 @@ const StudentReg = ({ isAuth, isLoading, registerNewUser }) => {
 }
 
 const mapStateToProps = state => ({
-   isAuth: state.initReg.isAuthenticated,
+   isRegID: state.initReg.isRegID,
    isLoading: state.initReg.isLoading
 })
 

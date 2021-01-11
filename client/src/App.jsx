@@ -14,6 +14,7 @@ import DataProvider from './Data/Context'
 import Routes from './Routes'
 import setAuthToken from './Helpers/SetAuthToken'
 import { loadNewUser } from './Data/Actions/InitRegAction'
+import { loadMainStudent } from './Data/Actions/FinalRegAction'
 
 if (localStorage.token) {
    setAuthToken(localStorage.token)
@@ -23,6 +24,7 @@ function App() {
 
    useEffect(() => {
       store.dispatch(loadNewUser())
+      store.dispatch(loadMainStudent())
    }, [])
 
    return (
@@ -34,4 +36,5 @@ function App() {
    );
 }
 
-export default App;
+
+export default (App);

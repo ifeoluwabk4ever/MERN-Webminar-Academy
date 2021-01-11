@@ -1,14 +1,22 @@
 import express from 'express'
 
 
-import { FinalStudentRegister } from '../Controllers/StudentFinalController.js'
+import initialAuth from '../Middleware/InitialStudentAuth.js'
+import finalAuth from '../Middleware/FinalStudentAuth.js'
+import AuthUndergraduate from '../Middleware/FinalStudentVerify.js'
+import { FinalStudentRegister, FinalStudentLogin, getFinalUser } from '../Controllers/StudentFinalController.js'
 
 
 
 const router = express.Router()
 
 
-router.post('/register', FinalStudentRegister)
+router.post('/register', initialAuth, FinalStudentRegister)
+
+router.post('/login', FinalStudentLogin)
+
+router.get('/student-info', finalAuth, AuthUndergraduate, getFinalUser)
+
 
 
 
