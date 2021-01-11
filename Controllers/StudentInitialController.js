@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 import UserInitial from '../Models/StudentInitialRegistrationModel.js'
+import UserFinal from '../Models/StudentFinalRegistrationModel.js'
 
 
 // @route   POST /api/new-student/register
@@ -90,6 +91,14 @@ export const InitialNewLoginUser = async (req, res) => {
          })
       }
 
+      let normalStudent = await UserFinal.findOne({ regID })
+
+      if (normalStudent.isRegistered) {
+         return res.status(400).json({
+            msg: 'Already registered as a Webminar student'
+         })
+      }
+
       if (passcode !== user.passcode) {
          return res.status(400).json({
             msg: 'Passcode do not match...'
@@ -135,6 +144,14 @@ export const InitialLoginUser = async (req, res) => {
       if (!user) {
          return res.status(400).json({
             msg: 'User does not exist...'
+         })
+      }
+
+      let normalStudent = await UserFinal.findOne({ regID })
+
+      if (normalStudent.isRegistered) {
+         return res.status(400).json({
+            msg: 'Already registered as a Webminar student'
          })
       }
 

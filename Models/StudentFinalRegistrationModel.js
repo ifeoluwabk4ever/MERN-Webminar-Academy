@@ -93,6 +93,10 @@ const StudentMainRegsitrationSchema = new mongoose.Schema({
    role: {
       type: String,
       default: 'Undergraduate'
+   },
+   isRegistered: {
+      type: Boolean,
+      default: true
    }
 },
    { timestamps: true }
