@@ -75,7 +75,7 @@ const TestPage = ({ loadNewUser, isLoading }) => {
             })
          }
          let testScore = { percentage: Number(percentage), isPassed: percentage >= 70 ? true : false }
-         await axios.patch(`/api/new-student/add-test-update`, { testScore, hadTest: true })
+         await axios.patch(`/webminar/new-student/add-test-update`, { testScore, hadTest: true })
          loadNewUser()
       } catch (error) {
          toast.error(error.response.data.msg)

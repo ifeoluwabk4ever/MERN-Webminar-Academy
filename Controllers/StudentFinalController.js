@@ -4,14 +4,14 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 
-// @route   POST /api/full-student/login
+// @route   POST /webminar/full-student/register
 // @desc    Register new student user
 // @access  Public
 export const FinalStudentRegister = async (req, res) => {
    try {
       let reqUser = await UserInital.findById({ _id: req.initialStudent.id })
 
-      let { firstName, lastName, fullName, email, telephone, dob, _id, avatar, hadTest, testScore, regID } = reqUser
+      let { firstName, lastName, fullName, email, telephone, dob, _id, avatar, hadTest, testScore, regID, department, course, department_name } = reqUser
 
       let { password, isDE } = req.body
 
@@ -45,9 +45,9 @@ export const FinalStudentRegister = async (req, res) => {
       let fetchedserialNo = await getSerialNo()
       let serialNo = Number(fetchedserialNo)
       let matricNo = getMatricNo(fetchedserialNo)
-      let schoolMail = getSchoolMail(lastName, firstName, fetchedserialNo)
+      let schoolMail = await getSchoolMail(lastName, firstName, serialNo)
 
-      let newUser = new UserFinal({ firstName, lastName, fullName, email, telephone, dob, regID, avatar, password, DEStudent, level, serialNo, matricNo, schoolMail, regIDLink })
+      let newUser = new UserFinal({ firstName, lastName, fullName, email, telephone, dob, regID, avatar, password, DEStudent, level, matricNo, schoolMail, regIDLink, department, course, department_name })
 
       // Create salt && hash
       // Encrypt password
@@ -73,7 +73,7 @@ export const FinalStudentRegister = async (req, res) => {
 }
 
 
-// @route   POST /api/full-student/login
+// @route   POST /webminar/full-student/login
 // @desc    Login user
 // @access  Public
 export const FinalStudentLogin = async (req, res) => {
@@ -122,12 +122,12 @@ export const FinalStudentLogin = async (req, res) => {
 }
 
 
-// @route   GET /api/full-student/student-info
+// @route   GET /webminar/full-student/student-info
 // @desc    Get Each User Information
 // @access  Private User
 export const getFinalUser = async (req, res) => {
    try {
-      let user = await UserFinal.findById(req.finalStudent.id)
+      let user = await UserFinal.findById(req.finalStudent.id).select('-password')
       if (!user) return res.status(400).json({
          msg: "User does not exist..."
       })
@@ -150,7 +150,7 @@ const createAccessToken = user => {
 export const getSerialNo = async () => {
    try {
       let userInit = await UserFinal.find()
-      let maxSerial = userInit.map(item => item.serialNo)
+      let maxSerial = userInit.map(item => Number(item.matricNo.substr(2)))
       let initSerial = maxSerial.length === 0 ? 0 : Math.max(...maxSerial.map(item => item))
       let finalSerial = initSerial + 1
       var serial
@@ -180,8 +180,30 @@ export const getMatricNo = serialNo => {
    return YearString + serialNo
 }
 
-export const getSchoolMail = (lastName, firstName, serialNo) => {
-   let finalValue = `${firstName.toLowerCase()}${lastName.toLowerCase()}${serialNo}@webminar.edu.ng`
-
+const getAddedValue = () => {
+   let values = ['a', 'b', 'c', 'd', 'e', 'f']
+   var numb = []
+   for (let i = 1; i <= 3; i++) {
+      let randomIndex = Math.floor(Math.random() * values.length)
+      numb.push(values[randomIndex])
+   }
+   var semi = numb.reduce((r, a) => {
+      return r += a
+   }, '')
+   let finalValue = `${semi}`
    return finalValue
+}
+
+export const getSchoolMail = async (lastName, firstName, serialNo) => {
+   let initValue = `${firstName.toLowerCase().replace(/( | - | _)/g, '')}${lastName.toLowerCase().replace(/( | - | _)/g, '')}${serialNo}@student.webminar.edu.ng`
+
+   let checkMail = await UserFinal.find()
+   let checkMail2 = checkMail.find(item => item.schoolMail === initValue)
+
+   if (!checkMail2) {
+      return initValue
+   } else {
+      let semi = getAddedValue()
+      return `${firstName.toLowerCase().replace(/( | - | _)/g, '')}${lastName.toLowerCase().replace(/( | - | _)/g, '')}${semi}${serialNo}@student.webminar.edu.ng`
+   }
 }

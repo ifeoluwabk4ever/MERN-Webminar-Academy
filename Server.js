@@ -13,7 +13,12 @@ import path from 'path'
 import connectDB from './Config/Db.js'
 import StudentInitialRoute from './Routes/StudentInitialRegistrationRoute.js'
 import StudentFinalRoute from './Routes/StudentFinalRegistrationRoute.js'
+import AcademicStaffRoute from './Routes/AcademicStaffRoutes.js'
+import FacultyRoute from './Routes/FacultyRoutes.js'
+import DepartmentRoute from './Routes/DepartmentRoutes.js'
+import CoursesRoute from './Routes/CoursesRoutes.js'
 import ImageUpload from './Routes/ImageUpload.js'
+
 
 const app = express()
 
@@ -30,10 +35,15 @@ app.use(express.static(path.join(__dirname, 'Public')))
 
 
 
-// Routes
-app.use('/api/new-student', StudentInitialRoute)
-app.use('/api/full-student', StudentFinalRoute)
-app.use('/api', ImageUpload)
+// Webminar Routes
+app.use('/webminar/new-student', StudentInitialRoute)
+app.use('/webminar/full-student', StudentFinalRoute)
+app.use('/webminar/academic-staff', AcademicStaffRoute)
+app.use('/webminar', FacultyRoute)
+app.use('/webminar', DepartmentRoute)
+app.use('/webminar', CoursesRoute)
+app.use('/webminar', ImageUpload)
+
 
 // Page not found
 app.use((req, res) => {

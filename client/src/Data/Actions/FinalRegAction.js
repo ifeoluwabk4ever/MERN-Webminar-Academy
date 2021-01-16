@@ -12,7 +12,7 @@ export let loadMainStudent = () => async dispatch => {
 
    dispatch({ type: STUDENT_SET_LOADING })
    try {
-      let res = await axios.get(`/api/full-student/student-info`)
+      let res = await axios.get(`/webminar/full-student/student-info`)
       dispatch({
          type: STUDENT_USER_LOADED,
          payload: res.data.user
@@ -40,7 +40,7 @@ export let registerMainStudent = ({ password, isDE }) => async dispatch => {
    dispatch({ type: STUDENT_SET_LOADING })
    try {
       // Response
-      let res = await axios.post(`/api/full-student/register`, body, config)
+      let res = await axios.post(`/webminar/full-student/register`, body, config)
       dispatch({
          type: STUDENT_REGISTER_SUCCESS,
          payload: res.data
@@ -71,7 +71,7 @@ export let loginMainStudent = ({ matricNo, password }) => async dispatch => {
    dispatch({ type: STUDENT_SET_LOADING })
    try {
       // Response
-      let res = await axios.post(`/api/full-student/login`, body, config)
+      let res = await axios.post(`/webminar/full-student/login`, body, config)
       dispatch({
          type: STUDENT_LOGIN_SUCCESS,
          payload: res.data

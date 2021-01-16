@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Container, Card } from 'reactstrap'
 import logo from '../Images/webminar1.jpg'
 import Loading from '../Utils/Loading'
+import { getAge } from './AcadStaffProfilePage'
 
 
 export let dateFormat = dob => {
@@ -51,7 +52,7 @@ const UtmeRegDetail = ({ user, isLoading }) => {
                   </div>
                   <div className="row">
                      <p className="col">Date of Birth:</p>
-                     <h6 className="col">{dateFormat(user.dob)}</h6>
+                     <h6 className="col">{dateFormat(user.dob)}, ({getAge(user.dob)})</h6>
                   </div>
                </div>
                <div className="d-flex justify-content-end reg-info-div">

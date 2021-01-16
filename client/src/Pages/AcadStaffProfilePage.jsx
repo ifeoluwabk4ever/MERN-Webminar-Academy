@@ -6,10 +6,16 @@ import logo from '../Images/webminar1.jpg'
 
 import { dateFormat } from './UtmeRegDetail'
 import Loading from '../Utils/Loading'
-import { getAge } from './AcadStaffProfilePage'
+
+export let getAge = myAge => {
+   let val1 = new Date(myAge).getTime()
+   let val2 = Date.now()
+   let val3 = new Date(val2 - val1)
+   return Math.abs(val3.getUTCFullYear() - 1970)
+}
 
 
-const StudentProfilePage = ({ user, isLoading }) => {
+const AcademicStaffProfilePage = ({ user, isLoading }) => {
 
    isLoading && <Loading />
 
@@ -21,11 +27,11 @@ const StudentProfilePage = ({ user, isLoading }) => {
                <img src={logo} alt="logo" className="reg-logo" />
             </div>
             <h1 className="text-center text-uppercase">webminar academy</h1>
-            <h3 className="text-center text-success">{user.department_name}</h3>
-            <h6 className="text-center text-decoration-underline">{user.schoolMail}</h6>
+            <h3 className="text-center text-success">{user.dept_name}</h3>
+            <h3 className="text-center text-muted">{user.schoolMail}</h3>
             <div className="text-center mb-4">
                <address>  P.M.B. 4000, Ilukuno Ekiti, Nigeria </address>
-               <h5 className="text-uppercase text-decoration-underline">student bio-Data</h5>
+               <h5 className="text-uppercase text-decoration-underline">staff bio-Data</h5>
             </div>
             <div className="reg-info">
                <div>
@@ -38,24 +44,16 @@ const StudentProfilePage = ({ user, isLoading }) => {
                      <h6 className="col text-success">{user.telephone}</h6>
                   </div>
                   <div className="row">
-                     <p className="col text-capitalize">UTME Registration Number:</p>
-                     <h6 className="col text-success">{user.regID}</h6>
-                  </div>
-                  <div className="row">
-                     <p className="col text-capitalize">Matriculation Number:</p>
-                     <h6 className="col text-success">{user.matricNo}</h6>
+                     <p className="col text-capitalize">Staff Identification Number:</p>
+                     <h6 className="col text-success">{user.staffID}</h6>
                   </div>
                   <div className="row">
                      <p className="col text-capitalize">Date of Birth:</p>
                      <h6 className="col text-success">{dateFormat(user.dob)}, ({getAge(user.dob)})</h6>
                   </div>
                   <div className="row">
-                     <p className="col text-capitalize">Course of study:</p>
-                     <h6 className="col text-success">{user.course}</h6>
-                  </div>
-                  <div className="row">
                      <p className="col text-capitalize">Level:</p>
-                     <h6 className="col text-success">{`${user.level}00 level`}</h6>
+                     <h6 className="col text-success">{`Level ${user.level}`}</h6>
                   </div>
                </div>
                <div className="d-flex justify-content-end reg-info-div">
@@ -68,8 +66,8 @@ const StudentProfilePage = ({ user, isLoading }) => {
 }
 
 const mapStateToProps = state => ({
-   user: state.mainStudent.student,
-   isLoading: state.mainStudent.isLoading
+   user: state.mainAcadStaff.acadStaff,
+   isLoading: state.mainAcadStaff.isLoading
 })
 
-export default connect(mapStateToProps, null)(StudentProfilePage)
+export default connect(mapStateToProps, null)(AcademicStaffProfilePage)

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { DotLoader, MoonLoader } from 'react-spinners';
-import { registerNewUser } from '../../../Data/Actions/InitRegAction';
+import { registerAcademicStaff } from '../../../Data/Actions/AcademicStaffAction';
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { FaTimes } from 'react-icons/all'
@@ -13,14 +13,15 @@ const initialState = {
    lastName: '',
    email: '',
    telephone: '',
+   department: '',
    dob: '',
-   department: ''
+   password: ''
 }
 
-const StudentReg = ({ isRegID, isLoading, registerNewUser, departments }) => {
+const AcademicStaffRegister = ({ isAcadStaff, isLoading, registerAcademicStaff, departments }) => {
 
    const [data, setData] = useState(initialState);
-   const { firstName, lastName, email, telephone, dob, department } = data
+   const { firstName, lastName, email, telephone, dob, department, password } = data
 
    const handleDataChange = input => e => {
       setData({ ...data, [input]: e.target.value })
@@ -28,7 +29,7 @@ const StudentReg = ({ isRegID, isLoading, registerNewUser, departments }) => {
 
    const [images, setImages] = useState(false)
    let [loading, setLoading] = useState(false)
-   let [callbackPSR, setCallbackPSR] = useState(false)
+   let [callbackAcadSR, setCallbackAcadSR] = useState(false)
    let [avatar, setAvatar] = useState('')
 
    let styleUpload = {
@@ -78,9 +79,9 @@ const StudentReg = ({ isRegID, isLoading, registerNewUser, departments }) => {
 
    let handleSubmit = async e => {
       e.preventDefault()
-      registerNewUser({ firstName, lastName, email, telephone, dob, avatar, department })
+      registerAcademicStaff({ firstName, lastName, email, telephone, dob, avatar, department, password })
 
-      setCallbackPSR(true)
+      setCallbackAcadSR(true)
    }
    let clearDefault = () => {
       setData({
@@ -89,19 +90,20 @@ const StudentReg = ({ isRegID, isLoading, registerNewUser, departments }) => {
          lastName: '',
          email: '',
          telephone: '',
+         department: '',
          dob: ''
       });
       setAvatar('')
    }
 
    useEffect(() => {
-      if (isRegID && callbackPSR) {
+      if (isAcadStaff && callbackAcadSR) {
          clearDefault();
       }
-   }, [callbackPSR])
+   }, [callbackAcadSR])
 
-   if (isRegID && callbackPSR) {
-      return <Redirect to="/new-student-post-utme-detail" />
+   if (isAcadStaff && callbackAcadSR) {
+      return <Redirect to="/academic-staff-profile-page" />
    }
 
 
@@ -170,6 +172,17 @@ const StudentReg = ({ isRegID, isLoading, registerNewUser, departments }) => {
             </div>
             <div className="form-floating mb-3">
                <input
+                  type="password"
+                  className="form-control text-black"
+                  id="password"
+                  placeholder="******"
+                  value={password}
+                  onChange={handleDataChange('password')}
+               />
+               <label htmlFor="password">Password:</label>
+            </div>
+            <div className="form-floating mb-3">
+               <input
                   type="tel"
                   name="telephone"
                   id="telephone"
@@ -200,10 +213,10 @@ const StudentReg = ({ isRegID, isLoading, registerNewUser, departments }) => {
                   onChange={handleDataChange("department")}
                   className="form-select text-black"
                >
-                  <option value="">Choose your course here</option>
+                  <option value="">Choose your department here</option>
                   {
                      departments.map(item => (
-                        <option key={item._id} value={item._id}>{item.course}</option>
+                        <option key={item._id} value={item._id}>{item.department}</option>
                      ))
                   }
                </select>
@@ -225,10 +238,10 @@ const StudentReg = ({ isRegID, isLoading, registerNewUser, departments }) => {
 }
 
 const mapStateToProps = state => ({
-   isRegID: state.initReg.isRegID,
-   isLoading: state.initReg.isLoading,
+   isAcadStaff: state.mainAcadStaff.isAcadStaff,
+   isLoading: state.mainAcadStaff.isLoading,
    departments: state.mainDepartment.department
 })
 
 
-export default connect(mapStateToProps, { registerNewUser })(StudentReg)
+export default connect(mapStateToProps, { registerAcademicStaff })(AcademicStaffRegister)

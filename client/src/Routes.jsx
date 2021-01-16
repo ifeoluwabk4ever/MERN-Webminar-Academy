@@ -14,8 +14,10 @@ import UtmeRegDetail from './Pages/UtmeRegDetail'
 import TestLogin from './Components/ExamPage/TestLogin'
 import HeaderNavbar from './Utils/HeaderNavbar'
 import StudentProfilePage from './Pages/StudentProfilePage'
+import AcadStaffProfilePage from './Pages/AcadStaffProfilePage'
+import AcademicStaffReg from './Components/Auth/AcademicStaffAuth/AcademicStaffReg'
 
-const Routes = ({ isRegID, isValidStudent, validStudent, newUser }) => {
+const Routes = ({ isRegID, isValidStudent, isAcadStaff }) => {
    return (
       <Router>
          <HeaderNavbar />
@@ -24,11 +26,13 @@ const Routes = ({ isRegID, isValidStudent, validStudent, newUser }) => {
          <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/new-student-register" exact component={StudentReg} />
+            <Route path="/academic-staff-register" exact component={AcademicStaffReg} />
             <Route path="/new-student-preview" exact component={isRegID ? TestPreview : ErrorPage} />
             <Route path="/new-student-test" exact component={isRegID ? TestPage : ErrorPage} />
             <Route path="/new-student-test-login" exact component={TestLogin} />
             <Route path="/new-student-post-utme-detail" exact component={isRegID ? UtmeRegDetail : ErrorPage} />
             <Route path="/student-profile-page" exact component={isValidStudent ? StudentProfilePage : ErrorPage} />
+            <Route path="/academic-staff-profile-page" exact component={isAcadStaff ? AcadStaffProfilePage : ErrorPage} />
             <Route component={ErrorPage} />
          </Switch>
       </Router>
@@ -38,6 +42,7 @@ const Routes = ({ isRegID, isValidStudent, validStudent, newUser }) => {
 const mapStateToProps = state => ({
    isRegID: state.initReg.isRegID,
    isValidStudent: state.mainStudent.isValidStudent,
+   isAcadStaff: state.mainAcadStaff.isAcadStaff
 })
 
 export default connect(mapStateToProps, null)(Routes)

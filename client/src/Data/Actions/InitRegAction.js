@@ -11,7 +11,7 @@ export let loadNewUser = () => async dispatch => {
    }
 
    try {
-      let res = await axios.get(`/api/new-student/info`)
+      let res = await axios.get(`/webminar/new-student/info`)
       dispatch({
          type: USER_LOADED,
          payload: res.data.user
@@ -25,7 +25,7 @@ export let loadNewUser = () => async dispatch => {
 
 
 // Register Action
-export let registerNewUser = ({ firstName, lastName, email, telephone, dob, avatar }) => async dispatch => {
+export let registerNewUser = ({ firstName, lastName, email, telephone, dob, avatar, department }) => async dispatch => {
    // Config header for axios
    let config = {
       headers: {
@@ -34,12 +34,12 @@ export let registerNewUser = ({ firstName, lastName, email, telephone, dob, avat
    }
 
    // Set body
-   let body = JSON.stringify({ firstName, lastName, email, telephone, dob, avatar })
+   let body = JSON.stringify({ firstName, lastName, email, telephone, dob, avatar, department })
 
    dispatch({ type: SET_LOADING })
    try {
       // Response
-      let res = await axios.post(`/api/new-student/register`, body, config)
+      let res = await axios.post(`/webminar/new-student/register`, body, config)
       dispatch({
          type: REGISTER_SUCCESS,
          payload: res.data
@@ -70,7 +70,7 @@ export let loginNewPostUtmeUser = ({ regID, passcode }) => async dispatch => {
    dispatch({ type: SET_LOADING })
    try {
       // Response
-      let res = await axios.post(`/api/new-student/login`, body, config)
+      let res = await axios.post(`/webminar/new-student/login`, body, config)
       dispatch({
          type: LOGIN_SUCCESS,
          payload: res.data
@@ -100,7 +100,7 @@ export let loginNewNormalUser = ({ regID, passcode }) => async dispatch => {
    dispatch({ type: SET_LOADING })
    try {
       // Response
-      let res = await axios.post(`/api/new-student/login-normal`, body, config)
+      let res = await axios.post(`/webminar/new-student/login-normal`, body, config)
       dispatch({
          type: LOGIN_SUCCESS,
          payload: res.data

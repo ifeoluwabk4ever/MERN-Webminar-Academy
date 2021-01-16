@@ -4,7 +4,8 @@ import slug from 'mongoose-slug-generator'
 mongoose.plugin(slug)
 const { ObjectId } = mongoose.Schema
 
-const StudentRegsitrationSchema = new mongoose.Schema({
+
+const AcademicStaffSchema = new mongoose.Schema({
    firstName: {
       type: String,
       required: true,
@@ -24,18 +25,25 @@ const StudentRegsitrationSchema = new mongoose.Schema({
       type: String,
       slug: 'fullName',
       unique: true,
+      slug_padding_size: 3
    },
    avatar: {
       type: String,
       required: true
    },
+   schoolMail: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true
+   },
    email: {
       type: String,
-      trim: true,
+      required: true,
       unique: true,
-      required: true
+      trim: true
    },
-   passcode: {
+   password: {
       type: String,
       trim: true,
       required: true,
@@ -43,43 +51,51 @@ const StudentRegsitrationSchema = new mongoose.Schema({
    },
    telephone: {
       type: String,
+      required: true,
       default: null
    },
    dob: {
       type: Date,
+      required: true,
       default: 'Nil',
    },
-   regID: {
+   staffID: {
       type: String,
       required: true,
-      unique: true,
+      trim: true,
+      unique: true
+   },
+   level: {
+      type: Number,
+      required: true,
       trim: true
-   },
-   testScore: {
-      type: Object,
-      default: {}
-   },
-   hadTest: {
-      type: Boolean,
-      default: false
-   },
-   department: {
-      type: ObjectId,
-      required: true,
-      ref: 'Department'
-   },
-   department_name: {
-      type: String,
-      required: true
-   },
-   course: {
-      type: String,
-      required: true
    },
    role: {
       type: String,
-      default: 'UtmeScreening'
+      default: 'AcademicStaff'
+   },
+   isRegistered: {
+      type: Boolean,
+      default: true
+   },
+   department: {
+      type: ObjectId,
+      ref: 'Department',
+      required: true,
+      trim: true
+   },
+   dept_name: {
+      type: String,
+      required: true,
+      trim: true
+   },
+   dept_code: {
+      type: String,
+      required: true,
+      trim: true
    }
-}, { timestamps: true })
+},
+   { timestamps: true }
+)
 
-export default mongoose.model('StudentInitReg', StudentRegsitrationSchema)
+export default mongoose.model('AcademicStaff', AcademicStaffSchema)

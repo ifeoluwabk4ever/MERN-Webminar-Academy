@@ -9,7 +9,7 @@ import logo from '../Images/webminar1.png'
 
 
 
-const Headers = ({ isRegID }) => {
+const Headers = ({ isRegID, isValidStudent, isAcadStaff }) => {
    const [isOpen, setIsOpen] = useState(false)
 
 
@@ -52,7 +52,7 @@ const Headers = ({ isRegID }) => {
             </div>
             <Collapse isOpen={isOpen} navbar>
                <Nav className="ml-auto d-flex align-items-center" navbar>
-                  {mainLinks} {isRegID && authLinks}
+                  {mainLinks} {isRegID || isValidStudent || isAcadStaff ? authLinks : null}
                </Nav>
             </Collapse>
          </Container>
@@ -61,7 +61,9 @@ const Headers = ({ isRegID }) => {
 }
 
 const mapStateToProps = state => ({
-   isRegID: state.initReg.isRegID
+   isRegID: state.initReg.isRegID,
+   isValidStudent: state.mainStudent.isValidStudent,
+   isAcadStaff: state.mainAcadStaff.isAcadStaff,
 })
 
 export default connect(mapStateToProps, null)(Headers)

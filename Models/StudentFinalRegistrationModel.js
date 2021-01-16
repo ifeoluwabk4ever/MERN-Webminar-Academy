@@ -63,7 +63,7 @@ const StudentMainRegsitrationSchema = new mongoose.Schema({
       required: true,
       unique: true,
       trim: true,
-      ref: 'StudentReg'
+      ref: 'StudentInitReg'
    },
    regID: {
       type: String,
@@ -74,11 +74,6 @@ const StudentMainRegsitrationSchema = new mongoose.Schema({
       type: String,
       required: true,
       trim: true,
-      unique: true
-   },
-   serialNo: {
-      type: Number,
-      required: true,
       unique: true
    },
    level: {
@@ -97,6 +92,19 @@ const StudentMainRegsitrationSchema = new mongoose.Schema({
    isRegistered: {
       type: Boolean,
       default: true
+   },
+   department: {
+      type: ObjectId,
+      required: true,
+      ref: 'Department'
+   },
+   department_name: {
+      type: String,
+      required: true
+   },
+   course: {
+      type: String,
+      required: true
    }
 },
    { timestamps: true }

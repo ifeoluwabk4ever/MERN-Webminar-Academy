@@ -15,6 +15,9 @@ import Routes from './Routes'
 import setAuthToken from './Helpers/SetAuthToken'
 import { loadNewUser } from './Data/Actions/InitRegAction'
 import { loadMainStudent } from './Data/Actions/FinalRegAction'
+import { loadAcademicStaff } from './Data/Actions/AcademicStaffAction'
+import { getDepartment } from './Data/Actions/DepartmentAction'
+import { getCourses } from './Data/Actions/CoursesAction'
 
 if (localStorage.token) {
    setAuthToken(localStorage.token)
@@ -25,6 +28,9 @@ function App() {
    useEffect(() => {
       store.dispatch(loadNewUser())
       store.dispatch(loadMainStudent())
+      store.dispatch(loadAcademicStaff())
+      store.dispatch(getDepartment())
+      store.dispatch(getCourses())
    }, [])
 
    return (

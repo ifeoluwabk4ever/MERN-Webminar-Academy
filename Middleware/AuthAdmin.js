@@ -5,7 +5,7 @@ const AuthAdmin = async (req, res, next) => {
       // Get User info by id
       let user = await User.findOne({ _id: req.user.id })
 
-      if (user.role === 0) return res.status(400).json({
+      if (user.role === 'WebminarAdmin') return res.status(400).json({
          msg: "Invalid Authentication, Admin resources!!!"
       })
 

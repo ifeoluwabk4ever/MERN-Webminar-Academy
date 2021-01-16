@@ -3,14 +3,15 @@ import jwt from 'jsonwebtoken'
 
 import UserInitial from '../Models/StudentInitialRegistrationModel.js'
 import UserFinal from '../Models/StudentFinalRegistrationModel.js'
+import Department from '../Models/DepartmentModel.js'
 
 
-// @route   POST /api/new-student/register
+// @route   POST /webminar/new-student/register
 // @desc    Register new user
 // @access  Public 
 export const InitialNewRegister = async (req, res) => {
    try {
-      let { firstName, lastName, email, telephone, dob, avatar } = req.body
+      let { firstName, lastName, email, telephone, dob, avatar, department } = req.body
 
       if (!firstName || !lastName) return res.status(400).json({
          msg: "Please supply your name"
@@ -23,6 +24,15 @@ export const InitialNewRegister = async (req, res) => {
       if (!email) return res.status(400).json({
          msg: "Email is required"
       })
+
+      if (!department) return res.status(400).json({
+         msg: "Department is required"
+      })
+
+      let checkDepartment = await Department.findById(department)
+
+      let department_name = checkDepartment.department
+      let course = checkDepartment.course
 
       // Check for existing user
       let user = await UserInitial.findOne({ email })
@@ -40,7 +50,7 @@ export const InitialNewRegister = async (req, res) => {
 
       let passcode = getUniquePasscode()
 
-      let newUser = new UserInitial({ firstName, lastName, fullName, email, passcode, telephone, dob, regID, avatar })
+      let newUser = new UserInitial({ firstName, lastName, fullName, email, passcode, telephone, dob, regID, avatar, department, course, department_name })
 
       await newUser.save()
 
@@ -59,7 +69,7 @@ export const InitialNewRegister = async (req, res) => {
 }
 
 
-// @route   POST /api/new-student/login
+// @route   POST /webminar/new-student/login
 // @desc    Login user
 // @access  Public
 export const InitialNewLoginUser = async (req, res) => {
@@ -91,14 +101,6 @@ export const InitialNewLoginUser = async (req, res) => {
          })
       }
 
-      let normalStudent = await UserFinal.findOne({ regID })
-
-      if (normalStudent.isRegistered) {
-         return res.status(400).json({
-            msg: 'Already registered as a Webminar student'
-         })
-      }
-
       if (passcode !== user.passcode) {
          return res.status(400).json({
             msg: 'Passcode do not match...'
@@ -121,7 +123,7 @@ export const InitialNewLoginUser = async (req, res) => {
 }
 
 
-// @route   POST /api/new-student/login-normal
+// @route   POST /webminar/new-student/login-normal
 // @desc    Login user
 // @access  Public
 export const InitialLoginUser = async (req, res) => {
@@ -144,14 +146,6 @@ export const InitialLoginUser = async (req, res) => {
       if (!user) {
          return res.status(400).json({
             msg: 'User does not exist...'
-         })
-      }
-
-      let normalStudent = await UserFinal.findOne({ regID })
-
-      if (normalStudent.isRegistered) {
-         return res.status(400).json({
-            msg: 'Already registered as a Webminar student'
          })
       }
 
@@ -178,7 +172,7 @@ export const InitialLoginUser = async (req, res) => {
 
 
 // @desc    Add test detail to Database
-// @route   PATCH /api/new-student/add-test-update
+// @route   PATCH /webminar/new-student/add-test-update
 // @access  Private User
 export const addTestUpdate = async (req, res) => {
    try {
@@ -201,7 +195,7 @@ export const addTestUpdate = async (req, res) => {
 }
 
 
-// @route   GET /api/new-student/info
+// @route   GET /webminar/new-student/info
 // @desc    Get Each User Information
 // @access  Private User
 export const getInitialUser = async (req, res) => {
