@@ -105,6 +105,22 @@ const StudentMainRegsitrationSchema = new mongoose.Schema({
    course: {
       type: String,
       required: true
+   },
+   isCourseRegistered: {
+      type: Boolean,
+      default: false,
+   },
+   courseRegistered: {
+      type: Array,
+      default: []
+   },
+   isTuitionPaid: {
+      type: Boolean,
+      default: false,
+   },
+   tuitionPayment: {
+      type: Array,
+      default: []
    }
 },
    { timestamps: true }

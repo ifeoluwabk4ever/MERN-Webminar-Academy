@@ -1,6 +1,6 @@
 import Courses from '../Models/CoursesModel.js'
 import Department from '../Models/DepartmentModel.js'
-// import Faculty from '../Models/FacultyModel.js'
+import UserFinal from '../Models/StudentFinalRegistrationModel.js'
 
 
 // @desc    Get all Courses
@@ -70,6 +70,46 @@ export const addCourse = async (req, res) => {
 
    } catch (error) {
       console.log(error.message);
+      return res.status(500).json({
+         success: false,
+         msg: error.message
+      })
+   }
+}
+
+
+// @desc    Get all Courses
+// @route   GET /webminar/all-courses
+// @access  Public
+export const getSortedUserCourse = async (req, res) => {
+   try {
+      let { level, semester } = req.body
+      let user = await UserFinal.findById(req.finalStudent.id)
+
+      if (!level) return res.status(400).json({
+         msg: `Level required`
+      })
+      if (!semester) return res.status(400).json({
+         msg: `Semester required`
+      })
+
+      let user_course = user.department
+      let allCourses = await Courses.find().sort({ course_code: 1 })
+      let firstSort = allCourses.filter(item =>
+         item.level === Number(level)
+      )
+      let secondSort = firstSort.filter(item =>
+         semester === item.semester && item
+      )
+      let userCourse = secondSort.filter(item =>
+         (user_course === item.department) || item.isGeneralCourse ? item : null
+      )
+      res.json({
+         success: true,
+         count: userCourse.length,
+         userCourse
+      })
+   } catch (error) {
       return res.status(500).json({
          success: false,
          msg: error.message

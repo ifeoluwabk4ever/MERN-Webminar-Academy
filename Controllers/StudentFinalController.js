@@ -142,6 +142,31 @@ export const getFinalUser = async (req, res) => {
 }
 
 
+// @route   PATCH /webminar/full-student/register-course
+// @desc    Add Courses registered
+// @access  Private User
+export const FinalStudentRegisterCourse = async (req, res) => {
+   try {
+      let user = await UserFinal.findById(req.finalStudent.id)
+      if (!user) return res.status(400).json({
+         msg: "User does not exist"
+      })
+      await UserFinal.findByIdAndUpdate({ _id: req.finalStudent.id }, {
+         courseRegistered: [...user.courseRegistered, req.body.courseRegistered],
+         isCourseRegistered: req.body.isCourseRegistered
+      })
+      return res.json({
+         msg: `Courses Registered`
+      })
+   } catch (error) {
+      console.log(error.message);
+      return res.status(500).json({
+         msg: error.message
+      })
+   }
+}
+
+
 
 const createAccessToken = user => {
    return jwt.sign(user, process.env.Jwt_Secret_Final_Student, { expiresIn: '2h' })

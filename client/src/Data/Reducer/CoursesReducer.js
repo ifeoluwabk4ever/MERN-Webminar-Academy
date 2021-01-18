@@ -1,9 +1,11 @@
-import { GET_COURSES, ADD_COURSES, DELETE_COURSES, COURSES_LOADING, GET_COURSES_FAIL, ADD_COURSES_FAIL, DELETE_COURSES_FAIL, UPDATE_COURSES_FAIL, UPDATE_COURSES } from '../Actions/ActionTypes'
+import { GET_COURSES, ADD_COURSES, DELETE_COURSES, COURSES_LOADING, GET_COURSES_FAIL, ADD_COURSES_FAIL, DELETE_COURSES_FAIL, UPDATE_COURSES_FAIL, UPDATE_COURSES, GET_USER_COURSES, GET_USER_COURSES_FAIL } from '../Actions/ActionTypes'
 
 
 // Initial State
 let initialState = {
    courses: [],
+   myCourse: [],
+   isMyCourse: null,
    isLoading: false,
    isValid: null
 }
@@ -38,6 +40,20 @@ export default (state = initialState, action) => {
          return {
             ...state,
             isLoading: true
+         }
+      case GET_USER_COURSES:
+         return {
+            ...state,
+            myCourse: payload,
+            isMyCourse: true,
+            isLoading: false
+         }
+      case GET_USER_COURSES_FAIL:
+         return {
+            ...state,
+            myCourse: null,
+            isMyCourse: false,
+            isLoading: false
          }
       case ADD_COURSES_FAIL:
       case DELETE_COURSES_FAIL:

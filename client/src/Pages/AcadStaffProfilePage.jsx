@@ -21,7 +21,7 @@ const AcademicStaffProfilePage = ({ user, isLoading }) => {
 
 
    return (
-      <Container className="d-flex align-content-center justify-content-center my-5">
+      <Container className="d-flex align-content-center justify-content-center">
          <div className="m-auto p-4 shadow user-detail">
             <div className="d-flex justify-content-center">
                <img src={logo} alt="logo" className="reg-logo" />

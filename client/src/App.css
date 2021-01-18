@@ -121,19 +121,19 @@ a {
 
 .slide1 {
    height: 100%;
-   background: linear-gradient(rgba(0, 255, 106, 0.5), rgba(0, 0, 255, 0.5)), url(./Images/bg1.jpg) center/cover no-repeat fixed !important;
+   background: linear-gradient(rgba(0, 255, 106, 0.3), rgba(0, 0, 255, 0.3)), url(./Images/bg4.jpg) center/cover no-repeat fixed !important;
 
 }
 
 .slide2 {
    height: 100%;
-   background: linear-gradient(rgba(0, 255, 106, 0.5), rgba(0, 0, 255, 0.5)), url(./Images/bg2.jpg) center/cover no-repeat fixed !important;
+   background: linear-gradient(rgba(0, 255, 106, 0.3), rgba(0, 0, 255, 0.3)), url(./Images/bg1.jpg) center/cover no-repeat fixed !important;
 
 }
 
 .slide3 {
    height: 100%;
-   background: linear-gradient(rgba(0, 255, 106, 0.5), rgba(0, 0, 255, 0.5)), url(./Images/bg3.jpg) center/cover no-repeat fixed !important;
+   background: linear-gradient(rgba(72, 128, 95, 0.3), rgba(0, 0, 255, 0.3)), url(./Images/bg8.jpg) center/cover no-repeat fixed !important;
 }
 
 .carousel-inner {
@@ -152,7 +152,7 @@ a {
    height: 100%;
    padding-left: 5%;
    letter-spacing: 1px;
-   background: rgba(0, 0, 0, 0.6);
+   background: rgba(0, 0, 0, 0.3);
 }
 
 .banner-opac h1 {

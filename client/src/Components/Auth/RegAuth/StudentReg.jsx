@@ -88,6 +88,7 @@ const StudentReg = ({ isRegID, isLoading, registerNewUser, departments }) => {
          firstName: '',
          lastName: '',
          email: '',
+         department: '',
          telephone: '',
          dob: ''
       });
