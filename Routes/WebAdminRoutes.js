@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { getAdminDetail, loginAdmin, registerAdmin } from '../Controllers/WebAdminController.js'
-import webAdmin from '../Middleware/WebAdmin.js'
+import webAdmin from '../Middleware/WebAdminAuth.js'
 
 
 
