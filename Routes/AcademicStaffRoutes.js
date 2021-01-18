@@ -1,7 +1,6 @@
 import express from 'express'
 
 import academicStaffAuth from '../Middleware/AcademicStaffAuth.js'
-import AuthAcademicStaff from '../Middleware/AcademicStaffVerify.js'
 import { getAcademicStaffDetail, loginStaff, registerStaff } from '../Controllers/AcademicStaffController.js'
 
 
@@ -12,7 +11,7 @@ router.post('/register', registerStaff)
 
 router.post('/login', loginStaff)
 
-router.get('/staff-info', academicStaffAuth, AuthAcademicStaff, getAcademicStaffDetail)
+router.get('/staff-info', academicStaffAuth, getAcademicStaffDetail)
 
 
 

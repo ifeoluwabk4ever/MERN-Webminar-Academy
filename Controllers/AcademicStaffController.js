@@ -161,7 +161,7 @@ const createAccessToken = user => {
    return jwt.sign(user, process.env.Jwt_Secret_Academic_Staff, { expiresIn: '2h' })
 }
 
-const getAddedValue = () => {
+export const getAddedValue = () => {
    let values = ['a', 'b', 'c', 'd', 'e', 'f']
    var numb = []
    for (let i = 1; i <= 3; i++) {

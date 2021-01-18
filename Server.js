@@ -14,6 +14,7 @@ import connectDB from './Config/Db.js'
 import StudentInitialRoute from './Routes/StudentInitialRegistrationRoute.js'
 import StudentFinalRoute from './Routes/StudentFinalRegistrationRoute.js'
 import AcademicStaffRoute from './Routes/AcademicStaffRoutes.js'
+import WebAdminRoute from './Routes/WebAdminRoutes.js'
 import FacultyRoute from './Routes/FacultyRoutes.js'
 import DepartmentRoute from './Routes/DepartmentRoutes.js'
 import CoursesRoute from './Routes/CoursesRoutes.js'
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'Public')))
 app.use('/webminar/new-student', StudentInitialRoute)
 app.use('/webminar/full-student', StudentFinalRoute)
 app.use('/webminar/academic-staff', AcademicStaffRoute)
+app.use('/webminar/admin', WebAdminRoute)
 app.use('/webminar', FacultyRoute)
 app.use('/webminar', DepartmentRoute)
 app.use('/webminar', CoursesRoute)

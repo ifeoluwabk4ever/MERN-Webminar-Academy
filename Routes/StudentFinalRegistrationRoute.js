@@ -3,7 +3,6 @@ import express from 'express'
 
 import initialAuth from '../Middleware/InitialStudentAuth.js'
 import finalAuth from '../Middleware/FinalStudentAuth.js'
-import AuthUndergraduate from '../Middleware/FinalStudentVerify.js'
 import { FinalStudentRegister, FinalStudentLogin, getFinalUser, FinalStudentRegisterCourse } from '../Controllers/StudentFinalController.js'
 
 
@@ -15,9 +14,9 @@ router.post('/register', initialAuth, FinalStudentRegister)
 
 router.post('/login', FinalStudentLogin)
 
-router.get('/student-info', finalAuth, AuthUndergraduate, getFinalUser)
+router.get('/student-info', finalAuth, getFinalUser)
 
-router.patch('/register-course', finalAuth, AuthUndergraduate, FinalStudentRegisterCourse)
+router.patch('/register-course', finalAuth, FinalStudentRegisterCourse)
 
 
 
