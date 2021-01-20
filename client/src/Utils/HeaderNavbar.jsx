@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navbar, NavItem, NavLink } from 'reactstrap'
 import AcademicStaffLogin from '../Components/Auth/AcademicStaffAuth/AcademicStaffLogin'
+import AdminLogin from '../Components/Auth/AdminAuth/AdminLogin'
 import MainStudentLogin from '../Components/Auth/MainStudentAuth/MainStudentLogin'
 import MainStudentRegister from '../Components/Auth/MainStudentAuth/MainStudentRegister'
 import StudentLogin from '../Components/Auth/RegAuth/StudentLogin'
@@ -81,10 +82,7 @@ const HeaderNavbar = () => {
                      <AcademicStaffLogin />
                   </NavItem>
                   <NavItem className="text-capitalize animate2 dropdown-item">
-                     <NavLink href="/new-student-payment">payment portal</NavLink>
-                  </NavItem>
-                  <NavItem className="text-capitalize animate2 dropdown-item">
-                     <NavLink href="/new-student-test-login">post UTME test</NavLink>
+                     <AdminLogin />
                   </NavItem>
                </ul>
             </div>

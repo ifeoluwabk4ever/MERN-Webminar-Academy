@@ -1,57 +1,57 @@
-import { GET_DEPARTMENT, ADD_DEPARTMENT, DELETE_DEPARTMENT, DEPARTMENT_LOADING, GET_DEPARTMENT_FAIL, ADD_DEPARTMENT_FAIL, DELETE_DEPARTMENT_FAIL, UPDATE_DEPARTMENT_FAIL, UPDATE_DEPARTMENT } from '../Actions/ActionTypes'
+import { GET_FACULTY, ADD_FACULTY, DELETE_FACULTY, FACULTY_LOADING, GET_FACULTY_FAIL, ADD_FACULTY_FAIL, DELETE_FACULTY_FAIL, UPDATE_FACULTY_FAIL, UPDATE_FACULTY } from '../Actions/ActionTypes'
 
 
 // Initial State
 let initialState = {
-   department: [],
+   faculty: [],
    isLoading: false,
+   isValidAuth: null,
    isValid: null,
-   isValidAuth: null
 }
 
 export default (state = initialState, action) => {
    let { payload, type } = action
    switch (type) {
-      case GET_DEPARTMENT:
+      case GET_FACULTY:
          return {
             ...state,
-            department: payload,
+            faculty: payload,
             isValid: true,
             isLoading: false
          }
-      case DELETE_DEPARTMENT:
+      case DELETE_FACULTY:
          return {
             ...state,
-            department: state.department.filter(item => item.department_id !== payload),
+            faculty: state.faculty.filter(item => item.faculty_id !== payload),
             isLoading: false,
             isValidAuth: true
          }
-      case ADD_DEPARTMENT:
+      case ADD_FACULTY:
          return {
             ...state,
-            department: [payload, ...state.department],
+            faculty: [payload, ...state.faculty],
             isValidAuth: true
          }
-      case UPDATE_DEPARTMENT:
+      case UPDATE_FACULTY:
          return {
             ...state,
-            department: [...state.department],
+            faculty: [...state.faculty],
             isValidAuth: true
          }
-      case DEPARTMENT_LOADING:
+      case FACULTY_LOADING:
          return {
             ...state,
             isLoading: true
          }
-      case ADD_DEPARTMENT_FAIL:
-      case DELETE_DEPARTMENT_FAIL:
-      case GET_DEPARTMENT_FAIL:
-      case UPDATE_DEPARTMENT_FAIL:
+      case ADD_FACULTY_FAIL:
+      case DELETE_FACULTY_FAIL:
+      case GET_FACULTY_FAIL:
+      case UPDATE_FACULTY_FAIL:
          return {
             ...state,
             isLoading: false,
-            isValid: false,
             isValidAuth: false,
+            isValid: false,
          }
       default:
          return state

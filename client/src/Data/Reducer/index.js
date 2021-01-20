@@ -5,12 +5,16 @@ import initReg from './InitRegReducer'
 import mainStudent from './FinalRegReducer'
 import mainAcadStaff from './AcademicStaffReducer'
 import mainDepartment from './DepartmentReducer'
+import mainFaculty from './FacultyReducer'
 import mainCourses from './CoursesReducer'
+import mainAdmin from './AdminReducer'
 
 export default combineReducers({
    initReg,
    mainStudent,
    mainAcadStaff,
    mainDepartment,
-   mainCourses
+   mainFaculty,
+   mainCourses,
+   mainAdmin
 })

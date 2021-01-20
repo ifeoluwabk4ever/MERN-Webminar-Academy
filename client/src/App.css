@@ -31,12 +31,58 @@ a {
 .home-panel {
    display: grid;
    grid-template-columns: 3.25fr 0.75fr;
-   height: 80vh;
+   height: 81vh;
+}
+
+.home-panel-sub {
+   display: grid;
+   grid-template-columns: 1fr !important;
+   height: 81vh;
+}
+
+.faculty-list-i {
+   cursor: pointer !important;
+}
+
+.home-panel-admin {
+   display: grid;
+   grid-template-columns: 1fr 4fr !important;
+   height: 81vh;
+}
+
+.home-panel-admin .panel-sidebar {
+   overflow: auto;
+}
+
+.sideRight {
+   background: #cce7db;
+   box-shadow: 2px 5px 5px #cce7db;
+}
+
+.sideRight .list-group-item {
+   background: transparent !important;
+}
+
+.faculty-list {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+   gap: 0.5rem;
+}
+
+.faculty-list .card {
+   max-height: 15rem;
 }
 
 @media screen and (max-width: 991px) {
-   .home-panel {
-      grid-template-columns: 1fr;
+
+   .home-panel,
+   .home-panel-admin,
+   .home-panel-sub {
+      grid-template-columns: 1fr !important;
+   }
+
+   .sideRight {
+      box-shadow: none;
    }
 }
 
@@ -143,7 +189,7 @@ a {
 .carousel-control {
    height: 10vh !important;
    margin: auto;
-   width: 3vw;
+   width: 4vw;
    background: rgba(25, 135, 84, 0.712) !important;
 }
 
@@ -376,4 +422,10 @@ a {
 
 .test-login form {
    width: 30vw;
+}
+
+@media screen and (max-width: 768px) {
+   .modalName {
+      display: block !important;
+   }
 }

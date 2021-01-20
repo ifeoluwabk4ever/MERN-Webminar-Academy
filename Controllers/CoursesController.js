@@ -116,3 +116,53 @@ export const getSortedUserCourse = async (req, res) => {
       })
    }
 }
+
+// @desc    update all Course
+// @route   PUT /webminar/all-courses:course_slug
+// @access  Private Admin
+export const editCourse = async (req, res) => {
+   try {
+      let { course_slug } = req.params
+      let findCourse = await Courses.findOne({ course_slug })
+      if (!findCourse) return res.status(400).json({
+         msg: `Course ${course_slug} not found`
+      })
+
+      let { course } = req.body
+      if (!course) return res.json({
+         msg: "Please provided what to update with???"
+      })
+      await Courses.findOneAndUpdate({ course_slug }, { course })
+      res.json({
+         msg: `Course ${course} updated`,
+         findCourse
+      })
+   } catch (error) {
+      return res.status(500).json({
+         msg: error.message
+      })
+   }
+}
+
+
+// @desc    delete all Course
+// @route   DELETE /webminar/all-courses:course_slug
+// @access  Private Admin
+export const deleteCourse = async (req, res) => {
+   try {
+      let { course_slug } = req.params
+      let findCourse = await Courses.findOne({ course_slug })
+      if (!findCourse) return res.status(400).json({
+         msg: `Course ${course_slug} not found`
+      })
+
+      let resCourse = await Courses.findOneAndDelete({ course_slug })
+      res.json({
+         msg: `Course ${resCourse.course_title} deleted`
+      })
+   } catch (error) {
+      return res.status(500).json({
+         msg: error.message
+      })
+   }
+}

@@ -7,7 +7,8 @@ let initialState = {
    myCourse: [],
    isMyCourse: null,
    isLoading: false,
-   isValid: null
+   isValid: null,
+   isValidAuth: null
 }
 
 export default (state = initialState, action) => {
@@ -24,17 +25,20 @@ export default (state = initialState, action) => {
          return {
             ...state,
             courses: state.courses.filter(item => item.courses_id !== payload),
-            isLoading: false
+            isLoading: false,
+            isValidAuth: true
          }
       case ADD_COURSES:
          return {
             ...state,
-            courses: [payload, ...state.courses]
+            courses: [payload, ...state.courses],
+            isValidAuth: true
          }
       case UPDATE_COURSES:
          return {
             ...state,
-            courses: [...state.courses]
+            courses: [...state.courses],
+            isValidAuth: true
          }
       case COURSES_LOADING:
          return {
@@ -62,7 +66,8 @@ export default (state = initialState, action) => {
          return {
             ...state,
             isLoading: false,
-            isValid: false
+            isValidAuth: false,
+            isValid: false,
          }
       default:
          return state

@@ -1,6 +1,8 @@
 import express from 'express'
 
 import { addDepartment, deleteDepartment, editDepartment, getDepartment } from '../Controllers/DepartmentController.js'
+import webAdminAuth from '../Middleware/WebAdminAuth.js'
+
 
 
 const router = express.Router()
@@ -8,11 +10,11 @@ const router = express.Router()
 
 router.route('/all-department')
    .get(getDepartment)
-   .post(addDepartment)
+   .post(webAdminAuth, addDepartment)
 
 router.route('/all-department/:course_slug')
-   .put(editDepartment)
-   .delete(deleteDepartment)
+   .put(webAdminAuth, editDepartment)
+   .delete(webAdminAuth, deleteDepartment)
 
 
 

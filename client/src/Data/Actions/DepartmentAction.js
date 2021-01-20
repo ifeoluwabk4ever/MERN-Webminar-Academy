@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { GET_DEPARTMENT, DELETE_DEPARTMENT, DEPARTMENT_LOADING, GET_DEPARTMENT_FAIL, DELETE_DEPARTMENT_FAIL, UPDATE_DEPARTMENT_FAIL, UPDATE_DEPARTMENT } from './ActionTypes'
+import { GET_DEPARTMENT, DELETE_DEPARTMENT, DEPARTMENT_LOADING, GET_DEPARTMENT_FAIL, DELETE_DEPARTMENT_FAIL, UPDATE_DEPARTMENT_FAIL, UPDATE_DEPARTMENT, ADD_DEPARTMENT, ADD_DEPARTMENT_FAIL } from './ActionTypes'
 
 
 
@@ -16,6 +16,33 @@ export let getDepartment = () => async dispatch => {
       dispatch({ type: GET_DEPARTMENT_FAIL })
    }
 }
+export let addDepartment = ({ course, course_code, faculty }) => async dispatch => {
+   // Config header for axios
+   let config = {
+      headers: {
+         'Content-Type': 'application/json'
+      }
+   }
+
+   let body = JSON.stringify({ course, course_code, faculty })
+   try {
+      dispatch(setItemLoading())
+      let res = await axios.post(`/webminar/all-department`, body, config)
+      dispatch({
+         type: ADD_DEPARTMENT,
+         payload: res.data
+      })
+      dispatch(getDepartment())
+      console.log(res.data);
+      toast.success(res.data.msg)
+   } catch (error) {
+      let errors = error.response.data.msg
+      if (errors) toast.error(errors)
+
+      dispatch({ type: ADD_DEPARTMENT_FAIL })
+   }
+}
+
 
 export let editDepartment = ({ course_slug, name }) => async dispatch => {
    try {

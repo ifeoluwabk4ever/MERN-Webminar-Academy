@@ -16,7 +16,9 @@ import setAuthToken from './Helpers/SetAuthToken'
 import { loadNewUser } from './Data/Actions/InitRegAction'
 import { loadMainStudent } from './Data/Actions/FinalRegAction'
 import { loadAcademicStaff } from './Data/Actions/AcademicStaffAction'
+import { loadAdmin } from './Data/Actions/AdminActions'
 import { getDepartment } from './Data/Actions/DepartmentAction'
+import { getFaculty } from './Data/Actions/FacultyAction'
 import { getCourses } from './Data/Actions/CoursesAction'
 
 if (localStorage.token) {
@@ -29,7 +31,9 @@ function App() {
       store.dispatch(loadNewUser())
       store.dispatch(loadMainStudent())
       store.dispatch(loadAcademicStaff())
+      store.dispatch(loadAdmin())
       store.dispatch(getDepartment())
+      store.dispatch(getFaculty())
       store.dispatch(getCourses())
    }, [])
 
