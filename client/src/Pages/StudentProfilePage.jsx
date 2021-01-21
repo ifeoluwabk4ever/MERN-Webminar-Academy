@@ -7,7 +7,7 @@ import axios from 'axios'
 
 import logo from '../Images/webminar1.jpg'
 import { dateFormat } from './UtmeRegDetail'
-import Loading from '../Utils/Loading'
+import Loading from '../Utils/Misc/Loading'
 import { getAge } from './AcadStaffProfilePage'
 import { getUserCourse } from '../Data/Actions/CoursesAction'
 import { loadMainStudent } from '../Data/Actions/FinalRegAction'

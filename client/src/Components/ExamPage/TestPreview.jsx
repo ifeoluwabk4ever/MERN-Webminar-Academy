@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardBody, CardHeader, Container, NavLink } from 'reactstrap'
-import { timeFrame } from '../../Utils/QuestionData'
+import { timeFrame } from '../../Utils/Misc/QuestionData'
 
 const TestPreview = () => {
    return (

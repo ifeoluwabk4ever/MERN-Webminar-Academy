@@ -18,6 +18,8 @@ import WebAdminRoute from './Routes/WebAdminRoutes.js'
 import FacultyRoute from './Routes/FacultyRoutes.js'
 import DepartmentRoute from './Routes/DepartmentRoutes.js'
 import CoursesRoute from './Routes/CoursesRoutes.js'
+import NewsLetterRoute from './Routes/NewsLetterRoutes.js'
+import FeedbackRoute from './Routes/FeedbackRoute.js'
 import ImageUpload from './Routes/ImageUpload.js'
 
 
@@ -44,6 +46,8 @@ app.use('/webminar/admin', WebAdminRoute)
 app.use('/webminar', FacultyRoute)
 app.use('/webminar', DepartmentRoute)
 app.use('/webminar', CoursesRoute)
+app.use('/webminar', NewsLetterRoute)
+app.use('/webminar', FeedbackRoute)
 app.use('/webminar', ImageUpload)
 
 

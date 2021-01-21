@@ -13,7 +13,7 @@
 
 html {
    scroll-behavior: smooth;
-   background: #f7f7f7;
+   background: #d1e7dd;
 }
 
 .reg-form {
@@ -30,13 +30,7 @@ a {
 
 .home-panel {
    display: grid;
-   grid-template-columns: 3.25fr 0.75fr;
-   height: 81vh;
-}
-
-.home-panel-sub {
-   display: grid;
-   grid-template-columns: 1fr !important;
+   grid-template-columns: 1fr;
    height: 81vh;
 }
 
@@ -55,8 +49,8 @@ a {
 }
 
 .sideRight {
-   background: #cce7db;
-   box-shadow: 2px 5px 5px #cce7db;
+   background: #d1e7dd;
+   box-shadow: 2px 5px 5px #d1e7dd;
 }
 
 .sideRight .list-group-item {
@@ -73,16 +67,58 @@ a {
    max-height: 15rem;
 }
 
+.contact-details {
+   display: grid;
+   gap: 2rem;
+   grid-template-columns: 1.5fr 2fr;
+}
+
+.contact-page {
+   height: 70vh;
+   background: linear-gradient(rgba(0, 255, 106, 0.3), rgba(0, 0, 255, 0.3)), url(./Images/bg9.jpg) center/cover no-repeat fixed !important;
+}
+
+.about-us {
+   height: 70vh;
+   background: linear-gradient(rgba(0, 255, 106, 0.3), rgba(0, 0, 255, 0.3)), url(./Images/bg8.jpg) center/cover no-repeat fixed !important;
+}
+
+.contact-top i {
+   color: #198754 !important;
+}
+
+.title-color,
+.contact-info h5 {
+   color: #198754 !important;
+}
+
+.title-color1 {
+   background: #4ec28d !important;
+}
+
+.about-btn {
+   width: 100%;
+}
+
 @media screen and (max-width: 991px) {
 
    .home-panel,
-   .home-panel-admin,
-   .home-panel-sub {
+   .home-panel-admin {
       grid-template-columns: 1fr !important;
    }
 
    .sideRight {
       box-shadow: none;
+   }
+
+   .footer-page,
+   .contact-details {
+      display: block !important;
+   }
+
+   .footer-page>div,
+   .contact-details>div {
+      margin: 2rem auto;
    }
 }
 
@@ -139,7 +175,7 @@ a {
 }
 
 .footer-top {
-   background: linear-gradient(rgba(0, 0, 255, 0.473), rgba(13, 109, 253, 0.473), rgba(0, 255, 106, 0.473)) !important;
+   background: linear-gradient(rgba(0, 255, 106, 0.473), rgba(13, 109, 253, 0.473), rgba(0, 0, 255, 0.473)), url(./Images/bg13.jpg) center/cover no-repeat fixed !important;
 }
 
 .foot-opac,
@@ -179,7 +215,7 @@ a {
 
 .slide3 {
    height: 100%;
-   background: linear-gradient(rgba(72, 128, 95, 0.3), rgba(0, 0, 255, 0.3)), url(./Images/bg8.jpg) center/cover no-repeat fixed !important;
+   background: linear-gradient(rgba(0, 255, 106, 0.3), rgba(0, 0, 255, 0.3)), url(./Images/bg8.jpg) center/cover no-repeat fixed !important;
 }
 
 .carousel-inner {
@@ -201,8 +237,14 @@ a {
    background: rgba(0, 0, 0, 0.3);
 }
 
-.banner-opac h1 {
-   font-size: 2rem
+.banner-opac h1,
+.about-us h1,
+.contact-page h1 {
+   font-size: clamp(2rem, 3.5vw, 4.5rem);
+}
+
+.banner-opac h1 span {
+   color: #4ec28d !important;
 }
 
 .banner-opac p {
@@ -317,10 +359,16 @@ a {
 }
 
 .upload {
-   width: 90%;
-   height: 20rem;
+   width: 70%;
+   height: 15rem;
    margin-left: 3rem;
    border: 1px solid #ddd;
+}
+
+.upload3 {
+   width: 95%;
+   height: 10rem;
+   margin-left: 0 !important;
 }
 
 .upload2 {
@@ -346,15 +394,18 @@ a {
    left: 0;
    background: #fff;
    color: #198754;
-   font-size: 11rem;
+   font-size: 8rem;
    text-align: center;
    cursor: pointer;
    margin: auto;
 }
 
 .upload-file2::before {
-   font-size: 8rem;
    margin-top: -2.5rem !important;
+}
+
+.upload-file3::before {
+   font-size: 5.5rem;
 }
 
 .file_img {

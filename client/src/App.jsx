@@ -20,6 +20,8 @@ import { loadAdmin } from './Data/Actions/AdminActions'
 import { getDepartment } from './Data/Actions/DepartmentAction'
 import { getFaculty } from './Data/Actions/FacultyAction'
 import { getCourses } from './Data/Actions/CoursesAction'
+import { getNews } from './Data/Actions/NewsAction'
+import { getFeedback } from './Data/Actions/FeedbackAction'
 
 if (localStorage.token) {
    setAuthToken(localStorage.token)
@@ -35,6 +37,8 @@ function App() {
       store.dispatch(getDepartment())
       store.dispatch(getFaculty())
       store.dispatch(getCourses())
+      store.dispatch(getNews())
+      store.dispatch(getFeedback())
    }, [])
 
    return (

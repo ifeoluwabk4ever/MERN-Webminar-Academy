@@ -8,6 +8,8 @@ import mainDepartment from './DepartmentReducer'
 import mainFaculty from './FacultyReducer'
 import mainCourses from './CoursesReducer'
 import mainAdmin from './AdminReducer'
+import mainNews from './NewsReducer'
+import mainFeedback from './FeedbackReducer'
 
 export default combineReducers({
    initReg,
@@ -16,5 +18,7 @@ export default combineReducers({
    mainDepartment,
    mainFaculty,
    mainCourses,
-   mainAdmin
+   mainAdmin,
+   mainNews,
+   mainFeedback
 })

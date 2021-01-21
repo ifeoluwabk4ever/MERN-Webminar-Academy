@@ -1,32 +1,29 @@
 import React from 'react'
-import { Container, Card, CardHeader, CardBody } from 'reactstrap'
+import { BiEditAlt, BiTrashAlt } from 'react-icons/bi'
 import { connect } from 'react-redux'
-import { BiEditAlt, BiTrashAlt } from 'react-icons/all'
+import { Card, CardBody, CardHeader, Container } from 'reactstrap'
 
 import Loading from '../../Utils/Misc/Loading'
-import { deleteFaculty } from '../../Data/Actions/FacultyAction'
 
-
-const FacultyPage = ({ faculties, isLoading, deleteFaculty }) => {
-
-   let deleteFacultyClick = (faculty_slug, name) => {
-      if (window.confirm(`Do you want to remove ${name} from category?`)) {
-         deleteFaculty(faculty_slug)
-      }
-   }
+const TopNews = ({ topNews, isLoading }) => {
 
    isLoading && <Loading />
 
+   const deleteNewsClick = (headies, name) => {
+      if (window.confirm(`Do you want to remove ${name} from category?`)) {
+         // deleteCourses(headies)
+      }
+   }
 
    return (
-      <Container className="py-3">
-         {faculties.length > 0 ?
+      <Container className="my-5">
+         {topNews.length > 0 ?
             <div className="faculty-list">
                {
-                  faculties.map(item => (
-                     <Card key={item._id} className="shadow">
+                  topNews.length > 0 ? topNews.map(item => (
+                     <Card className="my-2 shadow" key={item._id}>
                         <CardHeader className="d-flex justify-content-between align-items-center list-group-item-success">
-                           <h6>{item.faculty_name}</h6>
+                           <h6>{item.headline}</h6>
                            <div className="d-flex justify-content-between align-items-center">
                               <BiEditAlt
                                  color="#0dcaf0"
@@ -35,15 +32,17 @@ const FacultyPage = ({ faculties, isLoading, deleteFaculty }) => {
                               <BiTrashAlt
                                  color="#dc3545"
                                  className="faculty-list-i"
-                                 onClick={() => deleteFacultyClick(item.faculty_slug, item.faculty_name)}
+                                 onClick={() => deleteNewsClick(item.news_slug, item.headline)}
                               />
                            </div>
                         </CardHeader>
                         <CardBody className="overflow-auto">
-                           <p className="text-capitalize">{item.faculty_code}</p>
+                           <img src={`/Uploads/${item.mainImage}`} alt={item.headline} className="img-fluid" />
+                           <p className="my-3">{item.storyline.substring(0, 200)}...</p>
                         </CardBody>
                      </Card>
-                  ))
+                  )) :
+                     <h1 className="text-center text-muted text-uppercase">No item presently</h1>
                }
             </div> :
             <h1 className="text-center text-muted text-uppercase">No item presently</h1>
@@ -52,11 +51,9 @@ const FacultyPage = ({ faculties, isLoading, deleteFaculty }) => {
    )
 }
 
-
 const mapStateToProps = state => ({
-   faculties: state.mainFaculty.faculty,
-   isLoading: state.mainFaculty.isLoading
-
+   topNews: state.mainNews.news,
+   isLoading: state.mainNews.isLoading
 })
 
-export default connect(mapStateToProps, { deleteFaculty })(FacultyPage)
+export default connect(mapStateToProps, null)(TopNews)

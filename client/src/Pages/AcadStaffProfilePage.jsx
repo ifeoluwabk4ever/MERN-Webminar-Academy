@@ -5,7 +5,7 @@ import logo from '../Images/webminar1.jpg'
 
 
 import { dateFormat } from './UtmeRegDetail'
-import Loading from '../Utils/Loading'
+import Loading from '../Utils/Misc/Loading'
 
 export let getAge = myAge => {
    let val1 = new Date(myAge).getTime()

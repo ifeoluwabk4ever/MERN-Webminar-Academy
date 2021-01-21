@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavItem, NavLink } from 'reactstrap'
+
+
 import AddCourses from '../Courses/AddCourses'
-
-
 import AddDepartment from '../Department/AddDepartment'
 import AddFaculty from '../Faculty/AddFaculty'
 
@@ -96,11 +96,28 @@ const HomeSidebar = () => {
                <div id="flush-collapseFive" className="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-parent="#accordionFlushExample">
                   <div className="accordion-body">
                      <ul className="list-group list-group-flush text-capitalize">
-                        <li className="list-group-item">Cras justo odio</li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Morbi leo risus</li>
-                        <li className="list-group-item">Porta ac consectetur ac</li>
-                        <li className="list-group-item">Vestibulum at eros</li>
+                        <NavItem className="list-group-item text-capitalize animate2">
+                           <NavLink href="/add-news">add news</NavLink>
+                        </NavItem>
+                        <NavItem className="list-group-item text-capitalize animate2">
+                           <NavLink href="/admin-top-news">Top news</NavLink>
+                        </NavItem>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div className="accordion-item">
+               <h2 className="accordion-header" id="flush-headingSix">
+                  <button className="accordion-button collapsed text-capitalize" type="button" data-toggle="collapse" data-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                     feedbacks
+            </button>
+               </h2>
+               <div id="flush-collapseSix" className="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-parent="#accordionFlushExample">
+                  <div className="accordion-body">
+                     <ul className="list-group list-group-flush text-capitalize">
+                        <NavItem className="list-group-item text-capitalize animate2">
+                           <NavLink href="/feedbacks/all-feedbacks">feedbacks</NavLink>
+                        </NavItem>
                      </ul>
                   </div>
                </div>

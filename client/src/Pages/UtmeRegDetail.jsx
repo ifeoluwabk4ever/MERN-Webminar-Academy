@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Container, Card } from 'reactstrap'
 import logo from '../Images/webminar1.jpg'
-import Loading from '../Utils/Loading'
+import Loading from '../Utils/Misc/Loading'
 import { getAge } from './AcadStaffProfilePage'
 
 

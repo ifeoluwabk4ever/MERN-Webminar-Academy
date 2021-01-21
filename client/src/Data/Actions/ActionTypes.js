@@ -76,6 +76,24 @@ export const COURSES_LOADING = 'COURSES_LOADING'
 export const GET_USER_COURSES = 'GET_USER_COURSES'
 export const GET_USER_COURSES_FAIL = 'GET_USER_COURSES_FAIL'
 
+// News Action Types
+export const GET_NEWS = 'GET_NEWS'
+export const ADD_NEWS = 'ADD_NEWS'
+export const UPDATE_NEWS = 'UPDATE_NEWS'
+export const DELETE_NEWS = 'DELETE_NEWS'
+export const GET_NEWS_FAIL = 'GET_NEWS_FAIL'
+export const ADD_NEWS_FAIL = 'ADD_NEWS_FAIL'
+export const UPDATE_NEWS_FAIL = 'UPDATE_NEWS_FAIL'
+export const DELETE_NEWS_FAIL = 'DELETE_NEWS_FAIL'
+export const NEWS_LOADING = 'NEWS_LOADING'
+
+// Feedback Action Types
+export const GET_FEEDBACK = 'GET_FEEDBACK'
+export const ADD_FEEDBACK = 'ADD_FEEDBACK'
+export const GET_FEEDBACK_FAIL = 'GET_FEEDBACK_FAIL'
+export const ADD_FEEDBACK_FAIL = 'ADD_FEEDBACK_FAIL'
+export const FEEDBACK_LOADING = 'FEEDBACK_LOADING'
+
 
 // General Auth Action Type
 export const LOGOUT = 'LOGOUT'

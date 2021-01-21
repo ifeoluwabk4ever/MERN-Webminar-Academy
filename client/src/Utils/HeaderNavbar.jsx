@@ -10,7 +10,7 @@ const HeaderNavbar = () => {
    return (
       <Navbar className="py-0 header-navbar">
          <div className="btn-group w-100 text-center list-group list-group-horizontal">
-            <div className="dropdown list-group-item flex-fill">
+            <div className="dropdown list-group-item-success list-group-item flex-fill">
                <button className="btn dropdown-toggle text-capitalize" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
                   post UTME screening
                </button>
@@ -32,7 +32,7 @@ const HeaderNavbar = () => {
                   </NavItem>
                </ul>
             </div>
-            <div className="dropdown list-group-item flex-fill">
+            <div className="dropdown list-group-item-success list-group-item flex-fill">
                <button className="btn dropdown-toggle text-capitalize" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
                   undergraduate
                </button>
@@ -51,7 +51,7 @@ const HeaderNavbar = () => {
                   </NavItem>
                </ul>
             </div>
-            <div className="dropdown list-group-item flex-fill">
+            <div className="dropdown list-group-item-success list-group-item flex-fill">
                <button className="btn dropdown-toggle text-capitalize" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
                   postgraduate
                </button>
@@ -70,7 +70,7 @@ const HeaderNavbar = () => {
                   </NavItem>
                </ul>
             </div>
-            <div className="dropdown list-group-item flex-fill">
+            <div className="dropdown list-group-item-success list-group-item flex-fill">
                <button className="btn dropdown-toggle text-capitalize" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
                   staff
                </button>
@@ -86,7 +86,7 @@ const HeaderNavbar = () => {
                   </NavItem>
                </ul>
             </div>
-            <div className="dropdown list-group-item flex-fill">
+            <div className="dropdown list-group-item-success list-group-item flex-fill">
                <button className="btn dropdown-toggle text-capitalize" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
                   SUG
                </button>

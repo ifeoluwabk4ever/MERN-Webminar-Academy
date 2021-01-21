@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Logout from './Logout'
 import logo from '../Images/webminar1.png'
 import AdminRegister from '../Components/Auth/AdminAuth/AdminRegister'
+import AddNews from '../Components/News/AddNews'
 
 
 
@@ -23,12 +24,19 @@ const Headers = ({ isRegID, isValidStudent, isAcadStaff, isAdmin }) => {
          <NavItem className="text-white-50 text-capitalize animate2 navList">
             <NavLink href="/">Home</NavLink>
          </NavItem>
-         <NavItem className="text-white-50 text-capitalize animate2 navList">
-            <NavLink href="/about-us">about us</NavLink>
-         </NavItem>
-         <NavItem className="text-white-50 text-capitalize animate2 navList">
-            <NavLink href="/contact-us">contact us</NavLink>
-         </NavItem>
+         {!isAdmin &&
+            <Fragment>
+               <NavItem className="text-white-50 text-capitalize animate2 navList">
+                  <NavLink href="/about-us">about us</NavLink>
+               </NavItem>
+               <NavItem className="text-white-50 text-capitalize animate2 navList">
+                  <NavLink href="/contact-us">contact us</NavLink>
+               </NavItem>
+               <NavItem className="text-white-50 text-capitalize animate2 navList">
+                  <NavLink href="/top-news">news</NavLink>
+               </NavItem>
+            </Fragment>
+         }
          { isAdmin &&
             <Fragment>
                <NavItem className="text-white-50 text-capitalize animate2 navList d-lg-none">
@@ -36,6 +44,9 @@ const Headers = ({ isRegID, isValidStudent, isAcadStaff, isAdmin }) => {
                </NavItem>
                <NavItem className="text-white-50 text-capitalize animate2 navList">
                   <AdminRegister />
+               </NavItem>
+               <NavItem className="text-white-50 text-capitalize animate2 navList">
+                  <NavLink href="/add-news">add news</NavLink>
                </NavItem>
             </Fragment>
          }

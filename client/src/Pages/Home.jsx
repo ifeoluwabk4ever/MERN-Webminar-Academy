@@ -3,15 +3,12 @@ import { connect } from 'react-redux'
 
 
 import HomeBanner from '../Components/Home/HomeBanner'
-import HomeSidebar from '../Components/Home/HomeSidebar'
-import HomeTopNews from '../Components/Home/HomeTopNews'
 
 const Home = ({ isAdmin }) => {
    return (
       <div>
-         <div className={`${!isAdmin ? 'home-panel' : 'home-panel-sub'}`}>
+         <div className="home-panel">
             <HomeBanner />
-            {!isAdmin && <HomeTopNews />}
          </div>
       </div>
    )

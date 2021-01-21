@@ -7,8 +7,8 @@ import { connect } from 'react-redux'
 
 
 import TestSubmit from './TestSubmit';
-import questions from '../../Utils/QuestionData'
-import { timeFrame } from '../../Utils/QuestionData'
+import questions from '../../Utils/Misc/QuestionData'
+import { timeFrame } from '../../Utils/Misc/QuestionData'
 import { loadNewUser } from '../../Data/Actions/InitRegAction'
 import { FadeLoader } from 'react-spinners'
 

@@ -21,12 +21,19 @@ import HomeSidebar from './Components/Home/HomeSidebar'
 import FacultyPage from './Pages/Screens/FacultyPage'
 import DepartmentPage from './Pages/Screens/DepartmentPage'
 import CoursesPage from './Pages/Screens/CoursesPage'
+import TopNews from './Components/News/TopNews'
+import ContactPage from './Pages/ContactPage'
+import AboutPage from './Pages/AboutPage'
+import FooterTop from './Utils/FooterTop'
+import AddNews from './Components/News/AddNews'
+import AdminTopNews from './Components/News/AdminTopNews'
+import FeedbackPage from './Pages/Screens/FeedbackPage'
 
 const Routes = ({ isRegID, isValidStudent, isAcadStaff, isAdmin }) => {
    return (
       <Router>
-         {!isAdmin && <HeaderNavbar />}
          <Headers />
+         {!isAdmin && <HeaderNavbar />}
          <ToastContainer />
          <div className={`${isAdmin ? 'home-panel-admin' : ''}`}>
             {
@@ -36,6 +43,9 @@ const Routes = ({ isRegID, isValidStudent, isAcadStaff, isAdmin }) => {
             }
             <Switch>
                <Route path="/" exact component={Home} />
+               <Route path="/top-news" exact component={TopNews} />
+               <Route path="/contact-us" exact component={ContactPage} />
+               <Route path="/about-us" exact component={AboutPage} />
                <Route path="/new-student-register" exact component={StudentReg} />
                <Route path="/academic-staff-register" exact component={AcademicStaffReg} />
                <Route path="/new-student-preview" exact component={isRegID ? TestPreview : ErrorPage} />
@@ -46,7 +56,10 @@ const Routes = ({ isRegID, isValidStudent, isAcadStaff, isAdmin }) => {
                <Route path="/academic-staff-profile-page" exact component={isAcadStaff ? AcadStaffProfilePage : ErrorPage} />
                <div className={`${isAdmin ? 'panel-sidebar' : ''}`}>
                   <div className="ml-lg-3">
+                     <Route path="/admin-top-news" exact component={isAdmin ? AdminTopNews : ErrorPage} />
+                     <Route path="/feedbacks/all-feedbacks" exact component={isAdmin ? FeedbackPage : ErrorPage} />
                      <Route path="/activity" exact component={isAdmin ? HomeSidebar : ErrorPage} />
+                     <Route path="/add-news" exact component={isAdmin ? AddNews : ErrorPage} />
                      <Route path="/admin/dashboard" exact component={isAdmin ? AcadStaffProfilePage : ErrorPage} />
                      <Route path="/faculty/all-faculty-list" exact component={isAdmin ? FacultyPage : ErrorPage} />
                      <Route path="/department/all-department-list" exact component={isAdmin ? DepartmentPage : ErrorPage} />
@@ -56,6 +69,7 @@ const Routes = ({ isRegID, isValidStudent, isAcadStaff, isAdmin }) => {
                <Route component={ErrorPage} />
             </Switch>
          </div>
+         {!isAdmin && <FooterTop />}
          <Footer />
       </Router>
    )
