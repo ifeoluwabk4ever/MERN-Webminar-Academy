@@ -17,6 +17,7 @@ const TopNews = ({ topNews, isLoading }) => {
 
    return (
       <Container className="my-5">
+         <h2 className="text-center text-title text-uppercase text-decoration-underline">top news</h2>
          {topNews.length > 0 ?
             <div className="faculty-list">
                {

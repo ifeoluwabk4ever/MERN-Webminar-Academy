@@ -17,6 +17,7 @@ const FeebackPage = ({ feedbacks, isLoading }) => {
 
    return (
       <Container className="my-5">
+         <h2 className="text-center text-title text-uppercase text-decoration-underline">feedbacks</h2>
          {feedbacks.length > 0 ?
             <div className="faculty-list">
                {

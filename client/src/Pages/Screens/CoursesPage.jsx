@@ -20,6 +20,7 @@ const CoursesPage = ({ courses, isLoading, deleteCourses }) => {
 
    return (
       <Container className="py-3">
+         <h2 className="text-center text-title text-uppercase text-decoration-underline">courses</h2>
          {courses.length > 0 ?
             <div className="faculty-list">
                {
